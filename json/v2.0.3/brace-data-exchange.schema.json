@@ -114,10 +114,30 @@
           "type": "string",
           "description": ""
         },
+        "preferred_contact_method": {
+          "title": "Preferred Contact Method",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "PHONE",
+            "EMAIL",
+            "TEXT"
+          ]
+        },
         "last_four_of_ssn": {
           "title": "Last Four of SSN",
           "type": "string",
           "description": "The last 4 digits of the borrower's SSN for identity verification purposes"
+        },
+        "ssn": {
+          "title": "SSN",
+          "type": "string",
+          "description": "The borrower's full SSN. This is required if the client wants to do Equifax credit pulls or when using non-SSO authentication for linking accounts to borrower records."
+        },
+        "pull_credit": {
+          "$ref": "#/definitions/tribool",
+          "title": "Pull Credit",
+          "description": "This field can be used in combination with the (full) SSN to indicate that Brace should pull the borrower's credit report."
         },
         "equifax_credit_score": {
           "title": "Equifax Credit Score",
@@ -151,6 +171,31 @@
           "type": "string",
           "format": "date",
           "description": "Date that the related credit score was pulled (if present)"
+        },
+        "currently_employed": {
+          "$ref": "#/definitions/tribool",
+          "title": "Currently Employed",
+          "description": "Is the borrower currently employed?"
+        },
+        "actively_seeking_work": {
+          "$ref": "#/definitions/tribool",
+          "title": "Actively Seeking Work",
+          "description": "If unemployeed, does the borrower attest that they are actively seeking work?"
+        },
+        "self_employed": {
+          "$ref": "#/definitions/tribool",
+          "title": "Self Employed",
+          "description": "Is the borrower self employed?"
+        },
+        "explaination_for_lack_of_income": {
+          "title": "Explaination for Lack of Income",
+          "type": "string",
+          "description": "If borrower is not receiving any income, this field can be used for a free-form explaination of why."
+        },
+        "number_of_months_paid": {
+          "title": "Number of Months Paid",
+          "type": "integer",
+          "description": "If borrower is a teacher, this field indicates the number of months of the year they are paid."
         },
         "incomes": {
           "type": "array",
@@ -449,6 +494,26 @@
             "VA"
           ]
         },
+        "third_party_authorized_to_speak": {
+          "$ref": "#/definitions/tribool",
+          "title": "Third Party Authorized to Speak",
+          "description": "Are the borrowers working with a 3rd party that’s authorized to speak on their behalf during the modification review process?"
+        },
+        "third_party_name": {
+          "title": "Third Party Name",
+          "type": "string",
+          "description": "Name of authorized third party representative."
+        },
+        "third_party_phone_number": {
+          "title": "Third Party Phone Number",
+          "type": "string",
+          "description": "Phone number of authorized third party representative."
+        },
+        "third_party_email_address": {
+          "title": "Third Party Email Address",
+          "type": "string",
+          "description": "Email of authorized third party representative."
+        },
         "actual_payment_effective_date": {
           "title": "Actual Payment Effective Date",
           "type": "string",
@@ -695,6 +760,11 @@
           "type": "integer",
           "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster \"DR-4482\")"
         },
+        "forbearance_period": {
+          "title": "Forbearance Period",
+          "type": "integer",
+          "description": "The number of months the borrower has been in forbearance."
+        },
         "first_trial_payment_due_date": {
           "title": "First Trial Payment Due Date",
           "type": "string",
@@ -843,10 +913,20 @@
             "UNKNOWN_UNIFORM_BORROWER_ASSISTANCE_FORM_NOT_REQUIRED_TO_BE_COLLECTED"
           ]
         },
+        "other_description": {
+          "title": "Other Description",
+          "type": "string",
+          "description": "If Hardship Type is OTHER then this is a related free-form description"
+        },
         "disaster_name": {
           "title": "Disaster Name",
           "type": "string",
           "description": "Name of the designated FEMA disaster."
+        },
+        "fema_disaster_number": {
+          "title": "FEMA Disaster Number",
+          "type": "integer",
+          "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster 'DR-4482') (If a disaster name is supplied then this is required)"
         },
         "hardship_start_date": {
           "title": "Hardship Start Date",
@@ -1322,6 +1402,16 @@
           "title": "Association Dues",
           "description": "Amount of any monthly association dues"
         },
+        "frequency_of_association_dues": {
+          "title": "Frequency of Association Dues",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "MONTHLY",
+            "QUARTERLY",
+            "ANNUALLY"
+          ]
+        },
         "association_dues_2nd_home": {
           "$ref": "#/definitions/currency",
           "title": "Association Dues 2nd Home",
@@ -1488,6 +1578,11 @@
           "title": "Inspection Fee Balance",
           "description": "Total fee balance resulting from inspections * Capitalizable"
         },
+        "number_of_people_in_household": {
+          "title": "Number of People in Household",
+          "type": "integer",
+          "description": "Number of people in the household"
+        },
         "valuation": {
           "type": "object",
           "$ref": "#/definitions/property_valuation"
@@ -1569,10 +1664,25 @@
           "format": "date",
           "description": "The property must be marketed (i.e. offered for sale) prior to using the DIL option. *If this is blank, then a property listing record cannot be created within the Brace database."
         },
+        "listed_for_sale": {
+          "title": "Listed for Sale",
+          "$ref": "#/definitions/tribool",
+          "description": "Is the property currently listed for sale?"
+        },
         "listing_price": {
           "$ref": "#/definitions/currency",
           "title": "Listing Price",
           "description": "Listed sale price of the property."
+        },
+        "listing_agent_name": {
+          "title": "Listing Agent Name",
+          "type": "string",
+          "description": "Name of the listing agent if property is currently listed"
+        },
+        "listing_agent_phone_number": {
+          "title": "Listing Agent Phone Number",
+          "type": "string",
+          "description": "Phone number of listing agent if property is currently listed"
         }
       },
       "required": [ "date_property_marketed", "listing_price" ]
