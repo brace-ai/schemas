@@ -497,7 +497,13 @@
         "investor_code": {
           "title": "Investor Code",
           "type": "string",
-          "description": "Owner of the mortgage."
+          "description": "Owner of the mortgage.",
+          "enum": [
+            "FHLMC",
+            "FNMA",
+            "GNMA",
+            "TREASURY"
+          ]
         },
         "investor_loan_number": {
           "title": "Investor loan number",
@@ -979,13 +985,10 @@
           "type": "string",
           "description": "Length of hardship. (*) This is only required if we cannot derive it from the HardshipType. For example: - REDUCTION_IN_INCOME is always SHORT_TERM_TEMPORARY - DEATH_OF_BORROWER_WAGE_EARNER is PERMANENT - OTHER can be any length and it is up to the servicer to approve the documentation. Please see the \"Hardship Matrix\" sheet for more details.",
           "enum": [
-            "FHA",
-            "FHLMC",
-            "FNMA",
-            "GNMA",
-            "TREASURY",
-            "USDA",
-            "VA"
+            "SHORT_TERM_TEMPORARY",
+            "LONGTERM",
+            "PERMANENT",
+            "RESOLVED"
           ]
         },
         "pcs_orders_are_verified_50_miles_beyond": {
