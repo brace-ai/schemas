@@ -1,0 +1,1860 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.4/brace-data-exchange.schema.json",
+  "title": "Brace Data Exchange JSON Specification",
+  "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
+  "definitions": {
+    "currency": {
+      "type": "string",
+      "pattern": "^(0|([1-9]+[0-9]*))(\\.[0-9]{2})?$",
+      "minLength": 1,
+      "examples": [
+        "0",
+        "0.00",
+        "0.05",
+        "19.95",
+        "255.5",
+        "120000"
+      ]
+    },
+    "tribool": {
+      "type": "string",
+      "enum": [
+        "TRUE",
+        "FALSE",
+        "UNKOWN"
+      ]
+    },
+    "borrower": {
+      "type": "object",
+      "properties": {
+        "unique_borrower_identifier": {
+          "title": "Unique Borrower Identifier",
+          "type": "string",
+          "description": "A unique identifier, assigned by the servicer to identify the borrower. This is the primary key for this object."
+        },
+        "borrower_position": {
+          "title": "Borrower Position",
+          "type": "integer",
+          "description": "Used to associate income, expense, asset and credit score to the correct borrower. At least one borrower position must be reported. Income, assets, and expenses may be commingled and reported as Borrower Position 1, if not known at the borrower level, provided the borrower's occupancy status is the same."
+        },
+        "first_name": {
+          "title": "First Name",
+          "type": "string",
+          "description": ""
+        },
+        "middle_name": {
+          "title": "Middle Name",
+          "type": "string",
+          "description": ""
+        },
+        "last_name": {
+          "title": "Last Name",
+          "type": "string",
+          "description": ""
+        },
+        "mailing_address": {
+          "title": "Mailing Address",
+          "type": "string",
+          "description": ""
+        },
+        "mailing_address_2": {
+          "title": "Mailing Address 2",
+          "type": "string",
+          "description": ""
+        },
+        "mailing_city": {
+          "title": "Mailing City",
+          "type": "string",
+          "description": ""
+        },
+        "mailing_state": {
+          "title": "Mailing State",
+          "type": "string",
+          "description": ""
+        },
+        "mailing_zip_code": {
+          "title": "Mailing Zip Code",
+          "type": "string",
+          "description": ""
+        },
+        "email_address": {
+          "title": "Email Address",
+          "type": "string",
+          "format": "email",
+          "description": ""
+        },
+        "primary_phone_type": {
+          "title": "Primary Phone Type",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "MOBILE",
+            "WORK",
+            "HOME"
+          ]
+        },
+        "primary_phone_number": {
+          "title": "Primary Phone Number",
+          "type": "string",
+          "description": ""
+        },
+        "secondary_phone_type": {
+          "title": "Secondary Phone Type",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "MOBILE",
+            "WORK",
+            "HOME"
+          ]
+        },
+        "secondary_phone_number": {
+          "title": "Secondary Phone Number",
+          "type": "string",
+          "description": ""
+        },
+        "preferred_contact_method": {
+          "title": "Preferred Contact Method",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "PHONE",
+            "EMAIL",
+            "TEXT"
+          ]
+        },
+        "last_four_of_ssn": {
+          "title": "Last Four of SSN",
+          "type": "string",
+          "description": "The last 4 digits of the borrower's SSN for identity verification purposes"
+        },
+        "ssn": {
+          "title": "SSN",
+          "type": "string",
+          "description": "The borrower's full SSN. This is required if the client wants to do Equifax credit pulls or when using non-SSO authentication for linking accounts to borrower records."
+        },
+        "pull_credit": {
+          "$ref": "#/definitions/tribool",
+          "title": "Pull Credit",
+          "description": "This field can be used in combination with the (full) SSN to indicate that Brace should pull the borrower's credit report."
+        },
+        "equifax_credit_score": {
+          "title": "Equifax Credit Score",
+          "type": "integer",
+          "description": "Borrower credit score"
+        },
+        "equifax_pull_date": {
+          "title": "Equifax Pull Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date that the related credit score was pulled (if present)"
+        },
+        "experian_credit_score": {
+          "title": "Experian Credit Score",
+          "type": "integer",
+          "description": "Borrower credit score"
+        },
+        "experian_pull_date": {
+          "title": "Experian Pull Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date that the related credit score was pulled (if present)"
+        },
+        "transunion_credit_score": {
+          "title": "Transunion Credit Score",
+          "type": "integer",
+          "description": "Borrower credit score"
+        },
+        "transunion_pull_date": {
+          "title": "Transunion Pull Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date that the related credit score was pulled (if present)"
+        },
+        "currently_employed": {
+          "$ref": "#/definitions/tribool",
+          "title": "Currently Employed",
+          "description": "Is the borrower currently employed?"
+        },
+        "actively_seeking_work": {
+          "$ref": "#/definitions/tribool",
+          "title": "Actively Seeking Work",
+          "description": "If unemployeed, does the borrower attest that they are actively seeking work?"
+        },
+        "self_employed": {
+          "$ref": "#/definitions/tribool",
+          "title": "Self Employed",
+          "description": "Is the borrower self employed?"
+        },
+        "receiving_any_income": {
+          "$ref": "#/definitions/tribool",
+          "title": "Receiving Any Income",
+          "description": "Is the borrower receiving any income?"
+        },
+        "explaination_for_lack_of_income": {
+          "title": "Explaination for Lack of Income",
+          "type": "string",
+          "description": "If borrower is not receiving any income, this field can be used for a free-form explaination of why."
+        },
+        "number_of_months_paid": {
+          "title": "Number of Months Paid",
+          "type": "integer",
+          "description": "If borrower is a teacher, this field indicates the number of months of the year they are paid."
+        },
+        "sor_application_date": {
+          "title": "SOR Application Date",
+          "type": "integer",
+          "format": "date",
+          "description": "This field allows the servicer to control the start date against which we calculate number of days before timing out the borrower's application"
+        },
+        "sor_application_id": {
+          "title": "SOR Application ID",
+          "type": "string",
+          "description": "This field can be used for the servicer to pass through their own notion of a unique identifier for the currently open application for loss mitigation."
+        },
+        "incomes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/income"
+          }
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/asset"
+          }
+        },
+        "expenses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/expense"
+          }
+        },
+        "bankruptcies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/bankruptcy"
+          }
+        },
+        "deployments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/deployment"
+          }
+        }
+      },
+      "required": [
+        "unique_borrower_identifier",
+        "borrower_position",
+        "first_name",
+        "last_name",
+        "mailing_zip_code",
+        "email_address",
+        "primary_phone_type",
+        "primary_phone_number",
+        "last_four_of_ssn"
+      ]
+    },
+    "income": {
+      "type": "object",
+      "properties": {
+        "income_type": {
+          "title": "Income Type",
+          "type": "string",
+          "description": "The type of income.",
+          "enum": [
+            "ADOPTIONASSISTANCE",
+            "ALIMONY",
+            "BASEEMPLOYMENTNETINCOME",
+            "BASEEMPLOYMENTINCOME",
+            "BONUSES",
+            "CHILDSUPPORT",
+            "COMMISSIONSTIPS",
+            "DEATHBENEFITS",
+            "DISABILITY",
+            "HOUSINGALLOWANCE",
+            "INSURANCEINCOME",
+            "INVESTMENTINCOME",
+            "NETRENTALINCOME",
+            "NONBORROWERHOUSEHOLDMEMBERINCOME",
+            "NONTAXABLEDISABILITYINCOME",
+            "NONTAXABLESOCIALSECURITYINCOME",
+            "OTHERTYPEOFINCOME",
+            "OVERTIME",
+            "PENSIONRETIREMENT",
+            "PUBLICASSISTANCE",
+            "SELFEMPLOYMENTINCOME",
+            "SOCIALSECURITYDISABILITY",
+            "SOCIALSECURITYRETIREMENT",
+            "TRUSTANNUITYINCOME",
+            "UNEMPLOYMENT"
+          ]
+        },
+        "amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Amount",
+          "description": "Monthly amount."
+        }
+      },
+      "required": [
+        "income_type",
+        "amount"
+      ]
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "asset_type": {
+          "title": "Asset Type",
+          "type": "string",
+          "description": "Indicates the type of asset this is.",
+          "enum": [
+            "BOND",
+            "CASHONHAND",
+            "CERTIFICATEOFDEPOSIT",
+            "CHECKINGACCOUNT",
+            "MONEYMARKETMUTUALFUND",
+            "OTHERLIQUIDASSET",
+            "OTHERNONLIQUIDASSET",
+            "REALESTATENOTFORSALE",
+            "RETIREMENTFUNDSIRA401K",
+            "SAVINGSACCOUNT",
+            "STOCK"
+          ]
+        },
+        "amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Amount",
+          "description": "Total amount"
+        }
+      },
+      "required": [
+        "asset_type",
+        "amount"
+      ]
+    },
+    "expense": {
+      "type": "object",
+      "properties": {
+        "expense_type": {
+          "title": "Expense Type",
+          "type": "string",
+          "description": "Note that certain expenses are from credit bureau reports. These are handled differently for certain calculations. Namely: - AUTOLOAN - INSTALLMENTLOAN - LEASEPAYMENTS - PERSONALLOAN - REVOLVINGCHARGEACCOUNT - STUDENTLOAN - SUBJECTPROPERTYSUBORDINATEFINANCINGPANDI.",
+          "enum": [
+            "ALIMONYSEPARATEMAINTENANCE",
+            "ASSOCIATIONFEES",
+            "AUTOINSURANCE",
+            "AUTOMAINTENANCEREPAIR",
+            "AUTOLOAN",
+            "CABLE",
+            "CELLPHONE",
+            "CHILDCARE",
+            "CHILDSUPPORT",
+            "CREDITCARDMINIMUMPAYMENT",
+            "ELECTRICITY",
+            "ENTERTAINMENT",
+            "FIRSTMORTGAGEPANDI",
+            "FOOD",
+            "FUTUREHOUSINGEXPENSE",
+            "GASFORAUTO",
+            "GASFORHOME",
+            "HEALTHINSURANCE",
+            "HOMEOWNERSINSURANCE",
+            "HOMEPHONE",
+            "HOMEREPAIRS",
+            "INSTALLMENTLOAN",
+            "INTERNET",
+            "LIFEINSURANCE",
+            "MEDICALEXPENSE",
+            "NETRENTALEXPENSE",
+            "NOTAPPLICABLE",
+            "OPEN_30DAYCHARGEACCOUNT",
+            "OTHEREXPENSE",
+            "OTHERTRANSPORTATIONEXPENSES",
+            "PERSONALANDHOUSEHOLDITEMS",
+            "PERSONALLOAN",
+            "PRIMARYRESIDENCEHOUSINGEXPENSE",
+            "PROPERTYTAX",
+            "RENT",
+            "REVOLVINGCHARGEACCOUNT",
+            "SCHOOLTUITION",
+            "SECONDMORTGAGEPANDI",
+            "SEWER",
+            "STUDENTLOAN",
+            "SUBJECTPROPERTYNEGATIVENETCASHFLOW",
+            "SUBJECTPROPERTYOTHEREXPENSE",
+            "SUBJECTPROPERTYSUBORDINATEFINANCINGPANDI",
+            "TRASH",
+            "WATER"
+          ]
+        },
+        "amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Amount",
+          "description": "Monthly amount."
+        }
+      },
+      "required": [
+        "expense_type",
+        "amount"
+      ]
+    },
+    "bankruptcy": {
+      "type": "object",
+      "properties": {
+        "status_date": {
+          "title": "Status Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date that the Bankruptcy Status changed."
+        },
+        "bankruptcy_filing_date": {
+          "title": "Bankruptcy Filing Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date bankruptcy was filed. "
+        },
+        "bankruptcy_reaffirmed": {
+          "$ref": "#/definitions/tribool",
+          "title": "Bankruptcy Reaffirmed",
+          "description": "Indicates whether a borrower has reaffirmed the mortgage loan following bankruptcy discharge."
+        },
+        "bankruptcy_status": {
+          "title": "Bankruptcy Status",
+          "type": "string",
+          "description": "Indicates the current status of the bankruptcy proceeding.",
+          "enum": [
+            "DISCHARGED",
+            "DISMISSEDDENIED",
+            "FILED"
+          ]
+        },
+        "bankruptcy_type": {
+          "title": "Bankruptcy Type",
+          "type": "string",
+          "description": "Indicates the chapter of the US Bankruptcy Code referenced in the bankruptcy filing.",
+          "enum": [
+            "CHAPTER11",
+            "CHAPTER12",
+            "CHAPTER13",
+            "CHAPTER15",
+            "CHAPTER7",
+            "OTHER"
+          ]
+        },
+        "case_number": {
+          "title": "Case Number",
+          "type": "string",
+          "description": ""
+        }
+      },
+      "required": [
+        "status_date",
+        "bankruptcy_filing_date",
+        "bankruptcy_status",
+        "case_number"
+      ]
+    },
+    "deployment": {
+      "type": "object",
+      "properties": {
+        "active_duty_end_date": {
+          "title": "Active Duty End Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date servicemember ended active duty. Can be left blank"
+        },
+        "active_duty_start_date": {
+          "title": "Active Duty Start Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date servicemember began active duty. Can be left blank"
+        }
+      },
+      "required": [
+        "active_duty_start_date"
+      ]
+    },
+    "loan": {
+      "type": "object",
+      "properties": {
+        "unique_loan_identifier": {
+          "title": "Unique Loan Identifier",
+          "type": "string",
+          "description": "A unique identifier, assigned by the servicer to identify the loan. This is the primary key for this object."
+        },
+        "brand_identifier": {
+          "title": "Brand Identifier",
+          "type": "string",
+          "description": "An identifier that clients can use to specify special branding to be displayed in the context of this loan. For example, the value in this field could be used to display a logo, ie: Brand Identifier=123 would mean \"look for the logo file named 123.png to display\""
+        },
+        "investor_code": {
+          "title": "Investor Code",
+          "type": "string",
+          "description": "Owner of the mortgage."
+        },
+        "investor_loan_number": {
+          "title": "Investor loan number",
+          "type": "string",
+          "description": "Investor specific loan number"
+        },
+        "loan_product": {
+          "title": "Loan Product",
+          "type": "string",
+          "description": "The product of the loan / the guidelines under which the loan was originated",
+          "enum": [
+            "FHA",
+            "FNMA",
+            "FHLMC",
+            "USDA",
+            "VA"
+          ]
+        },
+        "third_party_authorized_to_speak": {
+          "$ref": "#/definitions/tribool",
+          "title": "Third Party Authorized to Speak",
+          "description": "Are the borrowers working with a 3rd party that’s authorized to speak on their behalf during the modification review process?"
+        },
+        "third_party_name": {
+          "title": "Third Party Name",
+          "type": "string",
+          "description": "Name of authorized third party representative."
+        },
+        "third_party_phone_number": {
+          "title": "Third Party Phone Number",
+          "type": "string",
+          "description": "Phone number of authorized third party representative."
+        },
+        "third_party_email_address": {
+          "title": "Third Party Email Address",
+          "type": "string",
+          "description": "Email of authorized third party representative."
+        },
+        "actual_payment_effective_date": {
+          "title": "Actual Payment Effective Date",
+          "type": "string",
+          "format": "date",
+          "description": "Payment Effective Date of the modified loan. This variant is the servicer-provided actual Modification Effective Date of the Final loan modification. This is servicer-provided for workout evaluation."
+        },
+        "arm_ceiling": {
+          "title": "ARM Ceiling",
+          "type": "number",
+          "description": "Maximum interest rate for an ARM or Step Rate Loan"
+        },
+        "arm_floor": {
+          "title": "ARM Floor",
+          "type": "number",
+          "description": "The minimum interest rate for an ARM or Step Rate Loan"
+        },
+        "arm_index": {
+          "title": "ARM Index",
+          "type": "string",
+          "description": "The index for an ARM loan"
+        },
+        "arm_margin": {
+          "title": "ARM Margin",
+          "type": "number",
+          "description": "The margin for an ARM loan"
+        },
+        "lien_position": {
+          "title": "Lien Position",
+          "type": "string",
+          "description": "Position of the lien. If this is not provided, the loan will be handled as a First Position loan.",
+          "enum": [
+            "FIRST",
+            "SECOND",
+            "THIRD",
+            "CLOUDED",
+            "UNKNOWN"
+          ]
+        },
+        "second_lien_upb": {
+          "$ref": "#/definitions/currency",
+          "title": "Second Lien UPB",
+          "description": "The UPB of any second liens"
+        },
+        "servicing_fee": {
+          "$ref": "#/definitions/currency",
+          "title": "Servicing Fee",
+          "description": "Monthly servicing fee received on the loan"
+        },
+        "subordinate_lien_holder_name": {
+          "title": "Subordinate Lien Holder Name",
+          "type": "string",
+          "description": "The name of the Company which holds the second lien"
+        },
+        "total_payments_received_before_modification": {
+          "title": "Total Payments Received before Modification",
+          "type": "integer",
+          "description": "Total monthly payment received since origination"
+        },
+        "trial_period_interest_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Trial Period Interest Amount",
+          "description": "Interest portion of all contractual payments applied during the trial period."
+        },
+        "bring_current_total_due": {
+          "$ref": "#/definitions/currency",
+          "title": "Bring Current Total Due",
+          "description": "Total amount of PITI to reinstate the loan. aka \"total arrearage\" amount"
+        },
+        "city_code_violation_exists": {
+          "$ref": "#/definitions/tribool",
+          "title": "City Code Violation Exists",
+          "description": "Do city code violations exist?"
+        },
+        "delinquency_debt_to_income_ratio": {
+          "title": "Delinquency Debt to Income Ratio ",
+          "type": "number",
+          "description": "Up Front Housing Ratio as calculated during delinquency"
+        },
+        "escrow_balance": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Balance",
+          "description": "Escrow Balance. Aka \"DLQ Escrow\""
+        },
+        "escrow_school_taxes": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow School Taxes",
+          "description": "Amount of monthly escrowed school taxes"
+        },
+        "i_o_flag_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "I/O Flag Indicator",
+          "description": "Interest only flag"
+        },
+        "incentive_fee": {
+          "$ref": "#/definitions/currency",
+          "title": "Incentive Fee",
+          "description": "Any fee received from an investor for completed loss mitigation programs"
+        },
+        "initial_partial_claim_date_of_default": {
+          "title": "Initial partial claim date of default",
+          "type": "string",
+          "format": "date",
+          "description": "Date of default from borrower's first partial claim."
+        },
+        "loan_is_in_litigation": {
+          "$ref": "#/definitions/tribool",
+          "title": "Loan Is In Litigation",
+          "description": "Indicates if the loan is in litigation"
+        },
+        "loan_is_in_recourse": {
+          "$ref": "#/definitions/tribool",
+          "title": "Loan Is In Recourse",
+          "description": "Indicates if the loan is in recourse"
+        },
+        "loan_is_leasehold_estate": {
+          "$ref": "#/definitions/tribool",
+          "title": "Loan Is Leasehold Estate",
+          "description": "Indicates if the loan is a leasehold estate"
+        },
+        "loan_is_subject_to_indemnification": {
+          "$ref": "#/definitions/tribool",
+          "title": "Loan Is Subject To Indemnification",
+          "description": "Indicates if the loan is subject to indemnification"
+        },
+        "mip_case_number": {
+          "title": "MIP Case Number",
+          "type": "string",
+          "description": "MIP case number"
+        },
+        "number_of_full_payments_made": {
+          "title": "Number of full payments made",
+          "type": "integer",
+          "description": "The number of full mortgage payments paid on the current loan."
+        },
+        "pmi_company_name": {
+          "title": "PMI Company Name",
+          "type": "string",
+          "description": "Name of the PMI company"
+        },
+        "previous_partial_claim_amounts": {
+          "$ref": "#/definitions/currency",
+          "title": "Previous partial claim amounts",
+          "description": "Sum of prior partial claim amounts."
+        },
+        "suspense_balance_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Suspense Balance Amount",
+          "description": "This represents partial mortgage payments made by the borrower that the servicer is holding in suspense. This includes any funds that are currently unapplied in the borrower's account. Do not include any amounts that are specifically flagged not to be applied to contractual payments, e.g. foreclosure fees and costs. Any value provided request file will be echoed back in the response file."
+        },
+        "task_age": {
+          "title": "Task Age",
+          "type": "integer",
+          "description": "Task age (in days) for loss mitigation task"
+        },
+        "expenses": {
+          "type": "object",
+          "$ref": "#/definitions/loan_expenses"
+        },
+        "terms": {
+          "type": "object",
+          "$ref": "#/definitions/loan_terms"
+        },
+        "delinquency": {
+          "type": "object",
+          "$ref": "#/definitions/loan_delinquency"
+        },
+        "hardships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hardship"
+          }
+        },
+        "workouts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/workout"
+          }
+        },
+        "payments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/loan_payment"
+          }
+        },
+        "borrowers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/borrower"
+          }
+        }
+      },
+      "required": [
+        "unique_loan_identifier",
+        "investor_code",
+        "investor_loan_number",
+        "loan_product",
+        "lien_position",
+        "bring_current_total_due",
+        "number_of_full_payments_made",
+        "previous_partial_claim_amounts"
+      ]
+    },
+    "workout": {
+      "type": "object",
+      "properties": {
+        "unique_workout_identifier": {
+          "title": "Unique Workout Identifier",
+          "type": "string",
+          "description": "A unique identifier, assigned by the servicer to identify the workout."
+        },
+        "workout_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/workout_history"
+          }
+        },
+        "amount_of_principal_balance_forgiveness": {
+          "$ref": "#/definitions/currency",
+          "title": "Amount of Principal Balance Forgiveness",
+          "description": "Indicates if there is any principal balance forgiveness as a result of a workout"
+        },
+        "disaster_name": {
+          "title": "Disaster Name",
+          "type": "string",
+          "description": "Name of the disaster involved with this workout."
+        },
+        "disaster_type": {
+          "title": "Disaster Type",
+          "type": "string",
+          "description": "Type of agency (federal, executive, or state) declaring the disaster that was the impetus for workout.",
+          "enum": [
+            "FEMA",
+            "PDMDA",
+            "STATE"
+          ]
+        },
+        "fema_disaster_number": {
+          "title": "FEMA Disaster Number",
+          "type": "integer",
+          "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster \"DR-4482\")"
+        },
+        "forbearance_period": {
+          "title": "Forbearance Period",
+          "type": "integer",
+          "description": "The number of months the borrower has been in forbearance."
+        },
+        "first_trial_payment_due_date": {
+          "title": "First Trial Payment Due Date",
+          "type": "string",
+          "format": "date",
+          "description": "This is the date that the first trial payment is due. If the servicer provides this value for a trial request, it must be greater than the current date. We will use the servicer provided value in its trial evaluation. If the servicer does not provide this value for a trial request, we will set the 1st Trial Payment Due Date based on the current date. The value used in the evaluation will be provided in the response file. If the current date is prior to the 16th of the month, the 1st Trial Payment Due Date will be the first of the next month. If the current date is the 16th of the month or later, the 1st Trial Payment Due Date will be the first of the following month. (Example: April 3 = May 1; April 27 = June 1). The 1st Trial Payment Due Date must be provided on a Final-Structuring Request."
+        },
+        "modified_loan_term": {
+          "title": "Modified Loan Term",
+          "type": "integer",
+          "description": "New loan term resulting from a modification, in months"
+        },
+        "modified_maturity_date": {
+          "title": "Modified Maturity Date",
+          "type": "string",
+          "format": "date",
+          "description": "New maturity date resulting from a modification"
+        },
+        "modified_principal_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Modified Principal Amount",
+          "description": "New UPB resulting from a modification"
+        },
+        "number_of_trial_payments": {
+          "title": "Number of Trial Payments",
+          "type": "integer",
+          "description": "Number of trial payments due for a modification"
+        },
+        "payment_reduction_percent": {
+          "title": "Payment Reduction Percent",
+          "type": "number",
+          "description": "If the prior modification provided a reduction of the borrower's pre-workout monthly payment (PITIAS), provide the amount of payment reduction, expressed as a percentage. Report this data field regardless of whether or not the workout was completed by the borrower."
+        },
+        "post_modification_dti": {
+          "title": "Post Modification DTI",
+          "type": "number",
+          "description": "New front end ratio resulting from a modification"
+        },
+        "trial_eligibility_date": {
+          "title": "Trial Eligibility Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date of positive eligibility determination for the trial that was committed to the borrower."
+        },
+        "trial_modification_payment": {
+          "$ref": "#/definitions/currency",
+          "title": "Trial Modification Payment",
+          "description": "Cash flow payments and dates required to receive trial payment plan payments"
+        },
+        "trial_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Trial Payment Amount",
+          "description": "Amount to be received for each trial payment"
+        },
+        "trial_payment_remaining_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Trial Payment Remaining Amount",
+          "description": "Total of all remaining trial period payments expected to be collected from the borrower prior to the end of the trial period."
+        },
+        "workout_type": {
+          "title": "Workout Type",
+          "type": "string",
+          "description": "See the \"Workout Types\" sheet. Specifiying a workout type that does not exist for the investor on the loan is an error.",
+          "enum": [
+            "ALTERNATIVE_MODIFICATION",
+            "ALTERNATIVE_MODIFICATION_30",
+            "BALLOONS",
+            "CAP_AND_EXTEND_MODIFICATION",
+            "COLLECTION",
+            "DEED_FOR_LEASE",
+            "DEED_IN_LIEU",
+            "DISASTER_EXTEND_MODIFICATION",
+            "DISASTER_MORATORIUM",
+            "ELEVEN_FIXED_RATE_CONVERTIBLE",
+            "FANNIE_MAE",
+            "FANNIE_MAE_24_PERCENT_HTI_MODIFICATION_FLOOR",
+            "FANNIE_MAE_FLEX_MODIFICATION",
+            "FANNIE_MAE_MODIFICATION",
+            "FIVE_LONG_TERM_STANDBY_COMMITMENT",
+            "FLEX_MOD",
+            "HOME_AFFORDABLE_MODIFICATION_PLAN",
+            "HOME_AFFORDABLE_REFINANCE_PROGRAM",
+            "HOME_SAVER_ADVANCE",
+            "HOME_SAVE_FORBEARANCE",
+            "LOSS_MIT_VALUATION",
+            "NON_STANDARD_FORBEARANCE_PLAN",
+            "ONE_DAILY_SIMPLE_INTEREST",
+            "OTHER_MODIFICATION",
+            "OTHER_WORKOUT_TYPE",
+            "PAYMENT_REDUCTION_PLAN",
+            "PRE_FORECLOSURE_SALE",
+            "REPAYMENT_PLAN",
+            "SECOND_LIEN_PROGRAM",
+            "SEVEN_VARIABLE_INTEREST",
+            "SIX_FIXED_INTEREST",
+            "STANDARD_BAU_MODIFICATION",
+            "STANDARD_FORBEARANCE_PLAN",
+            "STREAMLINED_MODIFICATION",
+            "TEN_STEP_RATE_MORTGAGE",
+            "TWELVE_BIWEEKLY",
+            "UNSPECIFIED",
+            "HAMP_COMBO",
+            "HAMP_PCO",
+            "HAMP_STANDALONE",
+            "FORMAL_FORBEARANCE",
+            "INFORMAL_FORBEARANCE",
+            "SPECIAL_FORBEARANCE",
+            "STANDARD_DIL",
+            "STREAMLINED_DIL",
+            "STREAMLINED_DIL_PCS",
+            "STANDARD_PFS",
+            "STREAMLINED_PFS",
+            "STREAMLINED_PFS_PCS",
+            "PPPSM",
+            "DISASTER_LOAN_MOD",
+            "STANDARD_SHORT_SALE",
+            "STREAMLINED_SHORT_SALE",
+            "STREAMLINED_SHORT_SALE_PCS"
+          ]
+        }
+      },
+      "required": [
+        "unique_workout_identifier",
+        "workout_type"
+      ]
+    },
+    "hardship": {
+      "type": "object",
+      "properties": {
+        "hardship_type": {
+          "title": "Hardship Type",
+          "type": "string",
+          "description": "All hardships communicated by the borrower (verified or unverified).",
+          "enum": [
+            "BUSINESS_FAILURE",
+            "DEATH_OF_BORROWER_WAGE_EARNER",
+            "DISASTER",
+            "DISTANT_EMPLOYMENT_TRANSFER",
+            "DIVORCE_OR_LEGAL_SEPARATION",
+            "INCREASE_IN_HOUSING_EXPENSES",
+            "LONG_TERM_OR_PERMANENT_ILLNESS_OR_DISABILITY_OF_BORROWER",
+            "LONG_TERM_OR_PERMANENT_ILLNESS_OR_DISABILITY_OF_DEPENDENT_FAMILY_MEMBER",
+            "OTHER",
+            "PROPERTY_PROBLEM",
+            "REDUCTION_IN_INCOME",
+            "UNEMPLOYMENT",
+            "UNKNOWN_UNIFORM_BORROWER_ASSISTANCE_FORM_NOT_REQUIRED_TO_BE_COLLECTED"
+          ]
+        },
+        "other_description": {
+          "title": "Other Description",
+          "type": "string",
+          "description": "If Hardship Type is OTHER then this is a related free-form description"
+        },
+        "disaster_name": {
+          "title": "Disaster Name",
+          "type": "string",
+          "description": "Name of the designated FEMA disaster."
+        },
+        "fema_disaster_number": {
+          "title": "FEMA Disaster Number",
+          "type": "integer",
+          "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster 'DR-4482') (If a disaster name is supplied then this is required)"
+        },
+        "hardship_start_date": {
+          "title": "Hardship Start Date",
+          "type": "string",
+          "format": "date",
+          "description": "The start date of the hardship"
+        },
+        "hardship_end_date": {
+          "title": "Hardship End Date",
+          "type": "string",
+          "format": "date",
+          "description": "The end date of the hardship, if the hardship has ended"
+        },
+        "length_of_hardship": {
+          "title": "Length of hardship",
+          "type": "string",
+          "description": "Length of hardship. (*) This is only required if we cannot derive it from the HardshipType. For example: - REDUCTION_IN_INCOME is always SHORT_TERM_TEMPORARY - DEATH_OF_BORROWER_WAGE_EARNER is PERMANENT - OTHER can be any length and it is up to the servicer to approve the documentation. Please see the \"Hardship Matrix\" sheet for more details.",
+          "enum": [
+            "FHA",
+            "FHLMC",
+            "FNMA",
+            "GNMA",
+            "TREASURY",
+            "USDA",
+            "VA"
+          ]
+        },
+        "pcs_orders_are_verified_50_miles_beyond": {
+          "$ref": "#/definitions/tribool",
+          "title": "PCS orders are verified 50 miles beyond",
+          "description": "Distance of the verified PCS address is more than 50 miles from the mortgaged residence of the servicemember. Can be left blank"
+        },
+        "pcs_orders": {
+          "$ref": "#/definitions/tribool",
+          "title": "PCS orders",
+          "description": "PCS orders. Can be left blank"
+        },
+        "pdmda_declaration_date": {
+          "title": "PDMDA declaration date",
+          "type": "string",
+          "format": "date",
+          "description": "."
+        },
+        "verified_gross_continuous_income_prior_to_pdmda": {
+          "$ref": "#/definitions/currency",
+          "title": "Verified gross continuous income prior to PDMDA",
+          "description": "."
+        }
+      },
+      "required": [
+        "hardship_type",
+        "hardship_start_date"
+      ]
+    },
+    "loan_expenses": {
+      "type": "object",
+      "properties": {
+        "attorney_fees": {
+          "$ref": "#/definitions/currency",
+          "title": "Attorney Fees",
+          "description": "Total outstanding attorney fees. Aka \"FCL Attorney Fees\" * Capitalizable"
+        },
+        "corporate_advance": {
+          "$ref": "#/definitions/currency",
+          "title": "Corporate Advance",
+          "description": "Total amount advanced for services provided on a loan (recoverable advances) * Capitalizable"
+        },
+        "escrow_advance": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Advance",
+          "description": "Total escrow advances * Capitalizable"
+        },
+        "escrow_shortfall": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Shortfall",
+          "description": "Monthly escrow shortfall from last escrow analysis"
+        },
+        "escrow_shortfall_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Shortfall 2nd Home",
+          "description": "Monthly escrow shortfall from last escrow analysis for 2nd home"
+        },
+        "escrow_shortfall_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Shortfall Investment",
+          "description": "Monthly escrow shortfall from last escrow analysis for investment"
+        },
+        "escrow_tax_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Tax Amount",
+          "description": "Amount of monthly escrowed tax amount"
+        },
+        "escrow_tax_amount_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Tax Amount 2nd Home",
+          "description": "Amount of monthly escrowed tax amount, 2nd home"
+        },
+        "escrow_tax_amount_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "Escrow Tax Amount Investment",
+          "description": "Amount of monthly escrowed tax amount, Investment"
+        },
+        "ground_rent_monthly_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Ground Rent Monthly Amount",
+          "description": "Amount of monthly ground rent."
+        },
+        "ground_rent_monthly_amount_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "Ground Rent Monthly Amount 2nd Home",
+          "description": "Amount of monthly ground rent, 2nd home"
+        },
+        "ground_rent_monthly_amount_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "Ground Rent Monthly Amount Investment",
+          "description": "Amount of monthly ground rent, investment"
+        }
+      },
+      "required": [
+        "attorney_fees",
+        "escrow_shortfall",
+        "escrow_shortfall_2nd_home",
+        "escrow_shortfall_investment",
+        "escrow_tax_amount",
+        "escrow_tax_amount_2nd_home",
+        "escrow_tax_amount_investment"
+      ]
+    },
+    "loan_terms": {
+      "type": "object",
+      "properties": {
+        "calculated_payment_effective_date": {
+          "title": "Calculated Payment Effective Date",
+          "type": "string",
+          "format": "date",
+          "description": "For Trial Modifications, this is calculated and is the first day of the month following the month when the last trial payment is due."
+        },
+        "estimated_hazard_insurance_proceeds": {
+          "$ref": "#/definitions/currency",
+          "title": "Estimated Hazard Insurance Proceeds",
+          "description": "The estimated amount of the hazard and/or flood insurance proceeds. "
+        },
+        "loan_pre-workout_interest_rate": {
+          "title": "Loan Pre-Workout Interest Rate",
+          "type": "number",
+          "description": "The current contractual interest rate at the time of program eligibility determination. This value is not determined by or related to the Last Paid Installment Date."
+        },
+        "loan_pre-workout_unpaid_principal_balance_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Loan Pre-Workout Unpaid Principal Balance Amount",
+          "description": "The unpaid principal balance of a loan, as recorded in the servicing system at the time of loan evaluation. Does not include any existing forbearance amount."
+        },
+        "loan_remaining_term": {
+          "title": "Loan Remaining Term",
+          "type": "integer",
+          "description": "Scheduled remaining term of the loan in months. Equivalent to the amortization term minus the time since the first payment after origination, regardless of months delinquent. Example: First payment date for a 360-month term loan was 5/1/16. The current evaluation date 4/30/17. Remaining term for this loan is 348 (360-12)."
+        },
+        "loan_type": {
+          "title": "Loan Type",
+          "type": "string",
+          "description": "Type of loan (e.g. FRM is a fixed-rate loan and covers all terms, 30yr, 15yr, etc.)",
+          "enum": [
+            "ARM",
+            "FIXED_RATE",
+            "INTEREST_ONLY",
+            "STEP_RATE",
+            "UNKNOWN"
+          ]
+        },
+        "maximum_arm_rate": {
+          "title": "Maximum ARM Rate",
+          "type": "number",
+          "description": "The maximum ARM rate for this loan, if it is an ARM rate loan"
+        },
+        "maximum_step_rate": {
+          "title": "Maximum Step Rate",
+          "type": "number",
+          "description": "The maximum step rate for this loan, if it is a step rate loan"
+        },
+        "monthly_mortgage_insurance_pre-workout_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Monthly Mortgage Insurance Pre-Workout Amount",
+          "description": "The borrower's monthly payment for private mortgage insurance, pre-workout. The pre-workout monthly mortgage insurance payment amount. In the scenario where Lender Paid MI (LPMI) is converted to Borrower Paid MI the amounts could be different pre- and post-workout."
+        },
+        "next_arm_reset_date": {
+          "title": "Next ARM Reset Date",
+          "type": "string",
+          "format": "date",
+          "description": "For ARM loans, the date the payment that reflects the next contractual ARM interest rate reset is due.  For fixed-rate interest-only loans where the loan is still in the interest-only period, the date the first payment is due based on when the  loan will begin to amortize. For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a future date, unless the loan was a step-rate loan and the last step period was reached or if the Interest Only period has ended. For ARMS and Step rate loans, this value is not determined by or related to the Last Paid Installment Date. Do not provide an Interest Only end date if the loan’s due date is on or after the day the loan became fully amortizing."
+        },
+        "next_arm_reset_rate": {
+          "title": "Next ARM Reset Rate",
+          "type": "number",
+          "description": "The expected contractual interest rate on an ARM loan at the next ARM reset date given the reset date is within the next 120 days. Use the latest available reset rate at the time of submission. If the reset date is outside of 120 days, or for fixed-rate interest-only loans, where the loan is still in the interest-only period, report the Loan Pre-Workout Interest Rate in this field. This value is not determined by or related to the Last Paid Installment Date. For Interest Only Loans, if the Interest Only period has ended after the next contractual payment due date provided but before the current submission date, the Next Arm Reset Rate should still be provided. Report all percentages in standard format (e.g. 5.125% should be sent as 5.125)"
+        },
+        "original_maturity_date": {
+          "title": "Original Maturity Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date on which the mortgage obligation is scheduled to be paid off, according to the mortgage note or modification agreement."
+        },
+        "promissory_note_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Promissory Note Amount",
+          "description": "The total amount of the Promissory Note being given by the borrower(s). Required. Note at origination. "
+        },
+        "promissory_note_first_payment_due_date": {
+          "title": "Promissory Note First Payment Due Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date on which the first payment on the original balance of the promissory note is due from the borrower."
+        },
+        "promissory_note_monthly_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Promissory Note Monthly Payment Amount",
+          "description": "The total monthly payment under the terms of the Promissory Note."
+        },
+        "promissory_note_term": {
+          "title": "Promissory Note Term",
+          "type": "integer",
+          "description": "The term of the Promissory Note in months."
+        },
+        "mi_mip_monthly_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "MI/MIP Monthly Amount",
+          "description": "Amount of monthly escrowed MI or MIP"
+        },
+        "mi_mip_monthly_amount_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "MI/MIP Monthly Amount 2nd Home",
+          "description": "Amount of monthly escrowed MI or MIP, 2nd home"
+        },
+        "mi_mip_monthly_amount_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "MI/MIP Monthly Amount Investment",
+          "description": "Amount of monthly escrowed MI or MIP, investment"
+        },
+        "original_mortgage_note_date": {
+          "title": "Original Mortgage Note Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date the mortgage note was signed."
+        }
+      },
+      "required": [
+        "loan_pre-workout_interest_rate",
+        "loan_pre-workout_unpaid_principal_balance_amount",
+        "loan_type",
+        "original_maturity_date",
+        "promissory_note_term",
+        "mi_mip_monthly_amount",
+        "mi_mip_monthly_amount_2nd_home",
+        "mi_mip_monthly_amount_investment",
+        "original_mortgage_note_date"
+      ]
+    },
+    "loan_payment": {
+      "type": "object",
+      "properties": {
+        "contractual_payment_due_date": {
+          "title": "Contractual Payment Due Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date of a scheduled contractual mortgage payment. A date must be reported for each Contractual Payment Amount. Dates must be unique and sequential."
+        },
+        "contractual_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Contractual Payment Amount",
+          "description": "Payment amount of a scheduled contractual mortgage payment. Must include any monthly mortgage insurance payment amount; must not include late fees. This amount should reflect the payment that will be required in order to advance the borrower's LPI date. It should exclude any late fees."
+        },
+        "interest_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Interest Payment Amount",
+          "description": "Interest amount associated with a scheduled contractual mortgage payment."
+        },
+        "principal_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Principal Payment Amount",
+          "description": "Principal amount associated with a scheduled contractual mortgage payment. If loan is interest only (IO), and in the IO period, send zero as principal amount for LPI+1."
+        },
+        "p_i_payment": {
+          "$ref": "#/definitions/currency",
+          "title": "P&I payment",
+          "description": "Loan Principal and Interest. This is only for the purpose of QC: this field is compared against \"Interest Payment Amount\" and \"Principal Payment Amount\" to ensure equality."
+        },
+        "p_i_payment_for_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "P&I payment for 2nd home",
+          "description": "Principal and Interest for 2nd home. Used in certain situations, e.g. Flex Mod on a 2nd home"
+        },
+        "p_i_payment_for_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "P&I payment for Investment",
+          "description": "Principal and Interest for Investment property. Used in certain situations, e.g. Flex Mod on a investment property"
+        }
+      },
+      "required": [
+        "contractual_payment_due_date",
+        "contractual_payment_amount",
+        "interest_payment_amount",
+        "principal_payment_amount",
+        "p_i_payment_for_2nd_home",
+        "p_i_payment_for_investment"
+      ]
+    },
+    "loan_delinquency": {
+      "type": "object",
+      "properties": {
+        "accrued_late_fee_penalty": {
+          "$ref": "#/definitions/currency",
+          "title": "Accrued Late Fee Penalty",
+          "description": "Expenses resulting from the borrower's failure to make timely mortgage payments. Reported amounts will be included in Repayment Plan analysis, but will not be included in modification analysis. Attorney fees, property preservation expenses and inspection fees should not be commingled in the reported amount. * Capitalizable"
+        },
+        "delinquent_interest_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Delinquent Interest Amount",
+          "description": "Delinquent interest for interest capitalization. It is the amount of delinquent interest from the loan's expected final LPI date prior to the loan workout until one month prior to the Loan Workout Effective Date. "
+        },
+        "foreclosure_status": {
+          "title": "Foreclosure Status",
+          "type": "string",
+          "description": "Indicates where this delinquency is in the foreclosure process. In other words, during the life of the foreclosure process there are stages of completion - the foreclosure status indicates what stage the foreclosure process is currently in. If the loan is in active foreclosure, report the most recent status. ",
+          "enum": [
+            "BORROWER_NOTICE_SENT",
+            "FORMAL_NOTICE_FILED",
+            "SALE_PENDING",
+            "REDEMPTION_PERIOD",
+            "EVICTION_IN_PROCESS",
+            "UNKNOWN"
+          ]
+        },
+        "last_paid_installment_date": {
+          "title": "Last Paid Installment Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date of current last paid installment on servicing system at the time of the call. This is sourced from an MSP system."
+        },
+        "loan_foreclosure_sale_date": {
+          "title": "Loan Foreclosure Sale Date",
+          "type": "string",
+          "format": "date",
+          "description": "The projected or actual date the property went to foreclosure sale at public auction."
+        },
+        "loan_foreclosure_sale_date_type": {
+          "title": "Loan Foreclosure Sale Date Type",
+          "type": "string",
+          "description": "Indicates if a future foreclosure sale date is estimated or scheduled for sale at public auction.",
+          "enum": [
+            "ESTIMATED",
+            "SCHEDULED",
+            "UNKNOWN"
+          ]
+        },
+        "number_of_consecutive_payments_on_rolling_delinquency": {
+          "title": "Number of Consecutive Payments On Rolling Delinquency",
+          "type": "integer",
+          "description": "Number of consecutive monthly contractual payments that have been made on the loan during a rolling delinquency."
+        },
+        "principal_deferment": {
+          "$ref": "#/definitions/currency",
+          "title": "Principal deferment",
+          "description": "The reduction of a portion of principal which is then tacked onto the balloon payment."
+        },
+        "rolling_30_day_delinquencies": {
+          "$ref": "#/definitions/tribool",
+          "title": "Rolling 30 day delinquencies",
+          "description": "Loan has two or more 30-day delinquencies in the most recent 6-month period"
+        }
+      },
+      "required": [
+        "accrued_late_fee_penalty",
+        "delinquent_interest_amount",
+        "foreclosure_status",
+        "last_paid_installment_date",
+        "loan_foreclosure_sale_date_type"
+      ]
+    },
+    "workout_history": {
+      "type": "object",
+      "properties": {
+        "effective_as_of": {
+          "title": "Effective As Of",
+          "type": "string",
+          "format": "date",
+          "description": "The effective date of the workout's state. Must be unique for a given workout."
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "description": "If the workout was not completed by the borrower, the reason the particular workout type reported by the servicer was not successful. Other free-form text can be placed here."
+        },
+        "workout_event": {
+          "title": "Workout Event",
+          "type": "string",
+          "description": "The event that caused the workout to assume its current state. Workouts are restricted in their state transition. The allowable before and after states and the event that allowed the transition are restricted to the tuples in the \"Workout Transitions\" sheet.",
+          "enum": [
+            "BK_COURT_DECLINED",
+            "BORROWER_ACCEPTED",
+            "BORROWER_CONVERTED_TO_ANOTHER_WORKOUT",
+            "BORROWER_DID_NOT_SIGN_REQUIRED_MODIFICATION_DOCUMENTS",
+            "BORROWER_FAILED_TO_RESPOND_TO_SOLICITATION",
+            "BORROWER_NO_LONGER_ELIGIBLE",
+            "BORROWER_REJECTED",
+            "CREATED_BY_DATALOADER",
+            "CREATED_BY_RULES_ENGINE",
+            "CREATED_BY_SERVICER",
+            "DATA_INCORRECT",
+            "DEFAULT_NOT_IMMINENT",
+            "DUPLICATE_INTEND_TO_RESUBMIT",
+            "EXCESSIVE_FORBEARANCE",
+            "FEDERALLY_DECLARED_DISASTER",
+            "INCOME_DOCUMENTATION_NOT_PROVIDED",
+            "INCOME_MISREPRESENTED",
+            "INELIGIBLE_BORROWER_CURRENT_HTI_LESS_THAN_31PERCENT",
+            "INELIGIBLE_MORTGAGE",
+            "INVESTOR_GUARANTOR_NOT_PARTICIPATING",
+            "LOAN_PAID_OFF_OR_REINSTATED",
+            "NEGATIVE_NPV",
+            "OFFER_NOT_ACCEPTED_BY_BORROWER_REQUEST_WITH_DRAWN",
+            "OTHER",
+            "OTHER_INELIGIBLE_PROPERTY",
+            "PAYMENT_PLAN_DEFAULT",
+            "PERM_MOD_DOCS_NOT_RETURNED",
+            "PREVIOUS_OFFICIAL_HAMP_MODIFICATION",
+            "PROPERTY_NOT_OWNER_OCCUPIED",
+            "REQUEST_INCOMPLETE",
+            "SERVICER_ACTIVATED",
+            "SERVICER_FAILED",
+            "SERVICER_PASSED",
+            "SERVICER_PROPOSED",
+            "SERVICER_REJECTED",
+            "SERVICER_RESCINDED",
+            "SERVICER_SELECTED",
+            "TRIAL_PERIOD_PLAN_PAYMENT_DEFAULT",
+            "UNEMPLOYMENT_FORBEARANCE_PLAN"
+          ]
+        },
+        "workout_state": {
+          "title": "Workout State",
+          "type": "string",
+          "description": "State of the workout. Internal documentation at Brace > Feature Requests > Workouts",
+          "enum": [
+            "ACCEPTED_BY_BORROWER",
+            "ACTIVE",
+            "CANDIDATE",
+            "FAILED",
+            "NONE",
+            "PASSED",
+            "PROPOSED",
+            "REJECTED_BY_BORROWER",
+            "REJECTED_BY_SERVICER",
+            "RESCINDED",
+            "SYSTEM_SUGGESTED"
+          ]
+        }
+      },
+      "required": [
+        "effective_as_of",
+        "workout_event",
+        "workout_state"
+      ]
+    },
+    "property": {
+      "type": "object",
+      "properties": {
+        "unique_property_identifier": {
+          "title": "Unique Property Identifier",
+          "type": "string",
+          "description": "A unique identifier assigned by the servicer to identify the property. This is the primary key for this object."
+        },
+        "association_dues": {
+          "$ref": "#/definitions/currency",
+          "title": "Association Dues",
+          "description": "Amount of any monthly association dues"
+        },
+        "frequency_of_association_dues": {
+          "title": "Frequency of Association Dues",
+          "type": "string",
+          "description": "",
+          "enum": [
+            "MONTHLY",
+            "QUARTERLY",
+            "ANNUALLY"
+          ]
+        },
+        "association_dues_2nd_home": {
+          "$ref": "#/definitions/currency",
+          "title": "Association Dues 2nd Home",
+          "description": "Amount of any monthly association dues, 2nd home"
+        },
+        "association_dues_investment": {
+          "$ref": "#/definitions/currency",
+          "title": "Association Dues Investment",
+          "description": "Amount of any monthly association dues, investment property"
+        },
+        "avm_date": {
+          "title": "AVM Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date of most recent AVM"
+        },
+        "avm_value": {
+          "$ref": "#/definitions/currency",
+          "title": "AVM Value",
+          "description": "Value of the most recent AVM"
+        },
+        "bpo_date": {
+          "title": "BPO Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date of the most recent BPO"
+        },
+        "bpo_value": {
+          "$ref": "#/definitions/currency",
+          "title": "BPO Value",
+          "description": "Value of the most recent BPO"
+        },
+        "capitalizable_repair_cost": {
+          "$ref": "#/definitions/currency",
+          "title": "Capitalizable Repair Cost",
+          "description": "The cost of repairs required to bring the property to good and habitable condition. Collected through an internal property inspection in the last 90 days. (Capitalizable only during a disaster scenario)"
+        },
+        "cash_contribution_prohibited": {
+          "$ref": "#/definitions/tribool",
+          "title": "Cash contribution prohibited",
+          "description": "Cash contribution prohibited by state law. Affects certain workouts, notably DIL."
+        },
+        "condition": {
+          "title": "Condition",
+          "type": "string",
+          "description": "A code denoting the condition of the subject property. This field is only mandatory for liquidations.",
+          "enum": [
+            "EXCELLENT",
+            "GOOD",
+            "FAIR",
+            "POOR",
+            "CONDEMNED",
+            "INACCESSIBLE"
+          ]
+        },
+        "current_loan_to_value_percent": {
+          "title": "Current Loan to Value Percent",
+          "type": "number",
+          "description": "Front end and back end expense ratios"
+        },
+        "environmental_problems": {
+          "$ref": "#/definitions/tribool",
+          "title": "Environmental Problems",
+          "description": "The property has problems that are environmental in nature (e.g. black mold.)"
+        },
+        "number_of_units": {
+          "title": "Number of Units",
+          "type": "integer",
+          "description": "Actual number of units in the property."
+        },
+        "occupancy_status": {
+          "title": "Occupancy Status",
+          "type": "string",
+          "description": "A code identifying the current occupancy status of the subject property. ",
+          "enum": [
+            "ABANDONED",
+            "BORROWER_OCCUPIED",
+            "OCCUPIED_BY_UNKNOWN",
+            "TENANT_OCCUPIED",
+            "UNKNOWN",
+            "VACANT"
+          ]
+        },
+        "property_address": {
+          "title": "Property Address",
+          "type": "string",
+          "description": "Property Street Address"
+        },
+        "property_address_2": {
+          "title": "Property Address 2",
+          "type": "string",
+          "description": "Second part of property address, apartment/unit/floor number"
+        },
+        "property_city": {
+          "title": "Property City",
+          "type": "string",
+          "description": "City in which the property securing the loan is located. "
+        },
+        "property_disposition": {
+          "title": "Property Disposition",
+          "type": "string",
+          "description": "Indicates the borrower's intention to remain in the property.",
+          "enum": [
+            "OCCUPY_AS_PRIMARY_RESIDENCE",
+            "RETAIN_AS_SECOND_HOME_OR_INVESTMENT_PROPERTY",
+            "SELL_OR_DO_NOT_RETAIN",
+            "UNDECIDED",
+            "VACATE"
+          ]
+        },
+        "property_state": {
+          "title": "Property State",
+          "type": "string",
+          "description": "The 2-character postal abbreviation of the state, province, or region of the subject property."
+        },
+        "property_type": {
+          "title": "Property Type",
+          "type": "string",
+          "description": "A code that defines the type of property that the loan is associated with.",
+          "enum": [
+            "CONDOMINIUM_PLANNED_UNIT_DEVELOPMENT_PUD",
+            "COOP",
+            "MOBILE_HOME",
+            "SINGLE_FAMILY",
+            "TOWNHOUSE",
+            "TWO_TO_FOUR_UNIT",
+            "UNKNOWN"
+          ]
+        },
+        "property_zip_code": {
+          "title": "Property Zip Code",
+          "type": "string",
+          "description": "The code designated by the postal service to direct the delivery of physical mail or which corresponds to a physical location. In the USA, this can take either a 5 digit form (ZIP Code) or a 9-digit form (ZIP + 4). TRUNCATE the zip code to allow only first 5 digits while sending to NPV or deriving the ZIP Code Eligibility Type"
+        },
+        "usage": {
+          "title": "Usage",
+          "type": "string",
+          "description": "A code identifying the intended use by the borrower of the subject property. ",
+          "enum": [
+            "INVESTMENTPROPERTY",
+            "PRINCIPALRESIDENCE",
+            "SECONDARYORVACATIONHOME",
+            "UNKNOWN"
+          ]
+        },
+        "usage_at_origination": {
+          "title": "Usage At Origination",
+          "type": "string",
+          "description": "See \"Usage\". This was the usage of the property at origination. Required for FHLMC Streamlined Short Sale",
+          "enum": [
+            "INVESTMENTPROPERTY",
+            "PRINCIPALRESIDENCE",
+            "SECONDARYORVACATIONHOME",
+            "UNKNOWN"
+          ]
+        },
+        "preservation_costs_and_fees": {
+          "$ref": "#/definitions/currency",
+          "title": "Preservation Costs and Fees",
+          "description": "The cost of repairs required to bring the property to good and habitable condition. Collected through an internal property inspection in the last 90 days. * Capitalizable"
+        },
+        "inspection_fee_balance": {
+          "$ref": "#/definitions/currency",
+          "title": "Inspection Fee Balance",
+          "description": "Total fee balance resulting from inspections * Capitalizable"
+        },
+        "number_of_people_in_household": {
+          "title": "Number of People in Household",
+          "type": "integer",
+          "description": "Number of people in the household"
+        },
+        "valuation": {
+          "type": "object",
+          "$ref": "#/definitions/property_valuation"
+        },
+        "listing": {
+          "type": "object",
+          "$ref": "#/definitions/property_listing"
+        },
+        "purchase_offer": {
+          "type": "object",
+          "$ref": "#/definitions/property_purchase_offer"
+        },
+        "insurance": {
+          "type": "object",
+          "$ref": "#/definitions/property_insurance"
+        },
+        "loans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/loan"
+          }
+        }
+      },
+      "required": [
+        "unique_property_identifier",
+        "association_dues",
+        "association_dues_2nd_home",
+        "association_dues_investment",
+        "condition",
+        "number_of_units",
+        "occupancy_status",
+        "property_address",
+        "property_city",
+        "property_disposition",
+        "property_state",
+        "property_type",
+        "property_zip_code",
+        "usage",
+        "usage_at_origination",
+        "insurance"
+      ]
+    },
+    "property_valuation": {
+      "type": "object",
+      "properties": {
+        "as_is_value": {
+          "$ref": "#/definitions/currency",
+          "title": "As Is Value",
+          "description": "For the chosen \"Valuation Type\", this is the as-is value of the property. Only relevant if a \"Valuation Type\" is provided."
+        },
+        "valuation_date": {
+          "title": "Valuation Date",
+          "type": "string",
+          "format": "date",
+          "description": "If this is blank, then a valuation record cannot be created within the Brace database."
+        },
+        "valuation_type": {
+          "title": "Valuation Type",
+          "type": "string",
+          "description": "This is the type of property valuation. It should be paired with a value in \"As Is Value\". If this is blank, then a valuation type record cannot be created within the Brace database.",
+          "enum": [
+            "AVM",
+            "EXTERIORAPPRAISAL",
+            "EXTERIORBROKEROPINIONBPO",
+            "INTERIORAPPRAISAL",
+            "INTERIORBROKEROPINIONBPO"
+          ]
+        }
+      },
+      "required": [ "as_is_value", "valuation_date", "valuation_type" ]
+    },
+    "property_listing": {
+      "type": "object",
+      "properties": {
+        "date_property_marketed": {
+          "title": "Date property marketed",
+          "type": "string",
+          "format": "date",
+          "description": "The property must be marketed (i.e. offered for sale) prior to using the DIL option. *If this is blank, then a property listing record cannot be created within the Brace database."
+        },
+        "listed_for_sale": {
+          "title": "Listed for Sale",
+          "$ref": "#/definitions/tribool",
+          "description": "Is the property currently listed for sale?"
+        },
+        "listing_price": {
+          "$ref": "#/definitions/currency",
+          "title": "Listing Price",
+          "description": "Listed sale price of the property."
+        },
+        "listing_agent_name": {
+          "title": "Listing Agent Name",
+          "type": "string",
+          "description": "Name of the listing agent if property is currently listed"
+        },
+        "listing_agent_phone_number": {
+          "title": "Listing Agent Phone Number",
+          "type": "string",
+          "description": "Phone number of listing agent if property is currently listed"
+        }
+      },
+      "required": [ "date_property_marketed", "listing_price" ]
+    },
+    "property_purchase_offer": {
+      "type": "object",
+      "properties": {
+        "net_sales_proceeds_amount": {
+          "title": "Net Sales Proceeds Amount",
+          "$ref": "#/definitions/currency",
+          "description": "The estimated or actual net sales proceeds to the borrower if the purchase offer is accepted."
+        },
+        "purchase_offer_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Purchase Offer Amount",
+          "description": "The gross purchase offer amount received by the servicer for the subject property."
+        },
+        "purchase_offer_closing_date": {
+          "title": "Purchase Offer Closing Date",
+          "type": "string",
+          "format": "date",
+          "description": "The closing date referenced in the purchase offer the servicer received for consideration on the subject property."
+        },
+        "purchase_offer_received_date": {
+          "title": "Purchase Offer Received Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date the servicer received a purchase offer on the subject property for consideration. The offer may result in borrower sales proceeds that are less than the full amount of indebtedness. * If this is blank, then a purchase offer record cannot be created within the Brace database."
+        },
+        "purchase_offer_accepted_date": {
+          "title": "Purchase Offer Accepted Date",
+          "type": "string",
+          "format": "date",
+          "description": "Date the borrower accepted a purchase offer"
+        }
+      },
+      "required": [ "purchase_offer_received_date" ]
+    },
+    "property_insurance": {
+      "type": "object",
+      "properties": {
+        "escrow_earthquake_insurance": {
+          "title": "Escrow Earthquake Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed earthquake insurance for primary residence"
+        },
+        "escrow_earthquake_insurance_2nd_home": {
+          "title": "Escrow Earthquake Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed earthquake insurance for 2nd home"
+        },
+        "escrow_earthquake_insurance_investment": {
+          "title": "Escrow Earthquake Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed earthquake insurance for investment"
+        },
+        "escrow_fire_insurance": {
+          "title": "Escrow Fire Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed fire insurance for primary residence"
+        },
+        "escrow_fire_insurance_2nd_home": {
+          "title": "Escrow Fire Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed fire insurance for 2nd home"
+        },
+        "escrow_fire_insurance_investment": {
+          "title": "Escrow Fire Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed fire insurance for investment"
+        },
+        "escrow_flood_insurance": {
+          "title": "Escrow Flood Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed flood insurance for primary residence."
+        },
+        "escrow_flood_insurance_2nd_home": {
+          "title": "Escrow Flood Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed flood insurance for 2nd home."
+        },
+        "escrow_flood_insurance_investment": {
+          "title": "Escrow Flood Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed flood insurance for investment."
+        },
+        "escrow_lava_insurance": {
+          "title": "Escrow Lava Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed lava insurance for primary residence"
+        },
+        "escrow_lava_insurance_2nd_home": {
+          "title": "Escrow Lava Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed lava insurance for 2nd home"
+        },
+        "escrow_lava_insurance_investment": {
+          "title": "Escrow Lava Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed lava insurance for investment"
+        },
+        "escrow_property_insurance": {
+          "title": "Escrow Property Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed property insurance."
+        },
+        "escrow_property_insurance_2nd_home": {
+          "title": "Escrow Property Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed property insurance. For the 2nd home."
+        },
+        "escrow_property_insurance_investment": {
+          "title": "Escrow Property Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed property insurance. For an investment property."
+        },
+        "escrow_wind_storm_insurance": {
+          "title": "Escrow Wind Storm Insurance",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed windstorm insurance for primary residence"
+        },
+        "escrow_wind_storm_insurance_2nd_home": {
+          "title": "Escrow Wind Storm Insurance 2nd Home",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed windstorm insurance for 2nd home"
+        },
+        "escrow_wind_storm_insurance_investment": {
+          "title": "Escrow Wind Storm Insurance Investment",
+          "$ref": "#/definitions/currency",
+          "description": "Amount of monthly escrowed windstorm insurance for investment"
+        }
+      },
+      "required": [
+        "escrow_flood_insurance",
+        "escrow_flood_insurance_2nd_home",
+        "escrow_flood_insurance_investment",
+        "escrow_property_insurance",
+        "escrow_property_insurance_2nd_home",
+        "escrow_property_insurance_investment"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "properties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/property"
+      }
+    }
+  }
+}
