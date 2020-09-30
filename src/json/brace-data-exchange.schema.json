@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.4/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.5/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -254,10 +254,7 @@
         "borrower_position",
         "first_name",
         "last_name",
-        "mailing_zip_code",
         "email_address",
-        "primary_phone_type",
-        "primary_phone_number",
         "last_four_of_ssn"
       ]
     },
@@ -497,7 +494,13 @@
         "investor_code": {
           "title": "Investor Code",
           "type": "string",
-          "description": "Owner of the mortgage."
+          "description": "Owner of the mortgage.",
+          "enum": [
+            "FHLMC",
+            "FNMA",
+            "GNMA",
+            "TREASURY"
+          ]
         },
         "investor_loan_number": {
           "title": "Investor loan number",
@@ -515,6 +518,25 @@
             "USDA",
             "VA"
           ]
+        },
+        "application_status": {
+          "title": "Application Status",
+          "type": "string",
+          "description": "The status of the application in terms of the borrower's receipt, completion, and signing of all documents",
+          "enum": [
+            "NOT_LOGGED_IN",
+            "LOGGED_IN",
+            "APPLICATION_STARTED",
+            "APPLICATION_ACTIVE",
+            "SUBMITTED",
+            "EXPIRED"
+          ]
+        },
+        "application_status_date": {
+          "title": "Application Status Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date of the last Application Status change"
         },
         "third_party_authorized_to_speak": {
           "$ref": "#/definitions/tribool",
@@ -728,18 +750,15 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/borrower"
-          }
+          },
+          "minItems": 1
         }
       },
       "required": [
         "unique_loan_identifier",
         "investor_code",
-        "investor_loan_number",
         "loan_product",
-        "lien_position",
-        "bring_current_total_due",
-        "number_of_full_payments_made",
-        "previous_partial_claim_amounts"
+        "borrowers"
       ]
     },
     "workout": {
@@ -967,13 +986,10 @@
           "type": "string",
           "description": "Length of hardship. (*) This is only required if we cannot derive it from the HardshipType. For example: - REDUCTION_IN_INCOME is always SHORT_TERM_TEMPORARY - DEATH_OF_BORROWER_WAGE_EARNER is PERMANENT - OTHER can be any length and it is up to the servicer to approve the documentation. Please see the \"Hardship Matrix\" sheet for more details.",
           "enum": [
-            "FHA",
-            "FHLMC",
-            "FNMA",
-            "GNMA",
-            "TREASURY",
-            "USDA",
-            "VA"
+            "SHORT_TERM_TEMPORARY",
+            "LONGTERM",
+            "PERMANENT",
+            "RESOLVED"
           ]
         },
         "pcs_orders_are_verified_50_miles_beyond": {
@@ -1067,15 +1083,7 @@
           "description": "Amount of monthly ground rent, investment"
         }
       },
-      "required": [
-        "attorney_fees",
-        "escrow_shortfall",
-        "escrow_shortfall_2nd_home",
-        "escrow_shortfall_investment",
-        "escrow_tax_amount",
-        "escrow_tax_amount_2nd_home",
-        "escrow_tax_amount_investment"
-      ]
+      "required": []
     },
     "loan_terms": {
       "type": "object",
@@ -1193,17 +1201,7 @@
           "description": "The date the mortgage note was signed."
         }
       },
-      "required": [
-        "loan_pre-workout_interest_rate",
-        "loan_pre-workout_unpaid_principal_balance_amount",
-        "loan_type",
-        "original_maturity_date",
-        "promissory_note_term",
-        "mi_mip_monthly_amount",
-        "mi_mip_monthly_amount_2nd_home",
-        "mi_mip_monthly_amount_investment",
-        "original_mortgage_note_date"
-      ]
+      "required": []
     },
     "loan_payment": {
       "type": "object",
@@ -1318,13 +1316,7 @@
           "description": "Loan has two or more 30-day delinquencies in the most recent 6-month period"
         }
       },
-      "required": [
-        "accrued_late_fee_penalty",
-        "delinquent_interest_amount",
-        "foreclosure_status",
-        "last_paid_installment_date",
-        "loan_foreclosure_sale_date_type"
-      ]
+      "required": []
     },
     "workout_history": {
       "type": "object",
@@ -1626,26 +1618,21 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/loan"
-          }
+          },
+          "minItems": 1
         }
       },
       "required": [
         "unique_property_identifier",
-        "association_dues",
-        "association_dues_2nd_home",
-        "association_dues_investment",
-        "condition",
         "number_of_units",
         "occupancy_status",
         "property_address",
         "property_city",
-        "property_disposition",
         "property_state",
         "property_type",
         "property_zip_code",
         "usage",
-        "usage_at_origination",
-        "insurance"
+        "loans"
       ]
     },
     "property_valuation": {
