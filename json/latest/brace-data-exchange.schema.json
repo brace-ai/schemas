@@ -494,7 +494,13 @@
         "investor_code": {
           "title": "Investor Code",
           "type": "string",
-          "description": "Owner of the mortgage."
+          "description": "Owner of the mortgage.",
+          "enum": [
+            "FHLMC",
+            "FNMA",
+            "GNMA",
+            "TREASURY"
+          ]
         },
         "investor_loan_number": {
           "title": "Investor loan number",
