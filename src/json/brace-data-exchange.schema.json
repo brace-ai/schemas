@@ -513,6 +513,25 @@
             "VA"
           ]
         },
+        "application_status": {
+          "title": "Application Status",
+          "type": "string",
+          "description": "The status of the application in terms of the borrower's receipt, completion, and signing of all documents",
+          "enum": [
+            "NOT_LOGGED_IN",
+            "LOGGED_IN",
+            "APPLICATION_STARTED",
+            "APPLICATION_ACTIVE",
+            "SUBMITTED",
+            "EXPIRED"
+          ]
+        },
+        "application_status_date": {
+          "title": "Application Status Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date of the last Application Status change"
+        },
         "third_party_authorized_to_speak": {
           "$ref": "#/definitions/tribool",
           "title": "Third Party Authorized to Speak",
