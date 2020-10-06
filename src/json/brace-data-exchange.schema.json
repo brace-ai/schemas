@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.5/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.6/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -201,17 +201,6 @@
           "title": "Number of Months Paid",
           "type": "integer",
           "description": "If borrower is a teacher, this field indicates the number of months of the year they are paid."
-        },
-        "sor_application_date": {
-          "title": "SOR Application Date",
-          "type": "integer",
-          "format": "date",
-          "description": "This field allows the servicer to control the start date against which we calculate number of days before timing out the borrower's application"
-        },
-        "sor_application_id": {
-          "title": "SOR Application ID",
-          "type": "string",
-          "description": "This field can be used for the servicer to pass through their own notion of a unique identifier for the currently open application for loss mitigation."
         },
         "incomes": {
           "type": "array",
@@ -537,6 +526,17 @@
           "type": "string",
           "format": "date",
           "description": "The date of the last Application Status change"
+        },
+        "sor_application_date": {
+          "title": "SOR Application Date",
+          "type": "string",
+          "format": "date",
+          "description": "This field allows the servicer to control the start date against which we calculate number of days before timing out the borrower's application"
+        },
+        "sor_application_id": {
+          "title": "SOR Application ID",
+          "type": "string",
+          "description": "This field can be used for the servicer to pass through their own notion of a unique identifier for the currently open application for loss mitigation."
         },
         "third_party_authorized_to_speak": {
           "$ref": "#/definitions/tribool",
