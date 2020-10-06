@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "loans": [
+        {
+          "unique_loan_identifier": "4892328b-7a74-44f9-9f03-6406e6e735d9",
+          "sor_application_date": "10/01/2020",
+          "sor_application_id": "147941e4-de58-46d5-af96-178a426809da",
+          "borrowers": [
+            {
+              "unique_borrower_identifier": "b7fa8321-8e2e-4369-9976-fca27544c78b",
+              "pull_credit": "FALSE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
