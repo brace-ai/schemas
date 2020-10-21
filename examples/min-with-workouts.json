@@ -3,13 +3,11 @@
     {
       "unique_property_identifier": "54e5cc79-bdf8-4dff-99e4-25d8776ad640",
       "number_of_units": 1,
-      "occupancy_status": "BORROWER_OCCUPIED",
       "property_address": "20 Ingram Street",
       "property_city": "Flushing",
       "property_state": "NY",
       "property_type": "SINGLE_FAMILY",
       "property_zip_code": "11375",
-      "usage": "PRINCIPALRESIDENCE",
       "loans": [
         {
           "unique_loan_identifier": "cc6c23d9-f76a-4560-af6e-77bd090aa0d3",
