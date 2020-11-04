@@ -1164,17 +1164,6 @@
           "type": "number",
           "description": "The expected contractual interest rate on an ARM loan at the next ARM reset date given the reset date is within the next 120 days. Use the latest available reset rate at the time of submission. If the reset date is outside of 120 days, or for fixed-rate interest-only loans, where the loan is still in the interest-only period, report the Loan Pre-Workout Interest Rate in this field. This value is not determined by or related to the Last Paid Installment Date. For Interest Only Loans, if the Interest Only period has ended after the next contractual payment due date provided but before the current submission date, the Next Arm Reset Rate should still be provided. Report all percentages in standard format (e.g. 5.125% should be sent as 5.125)"
         },
-        "previous_arm_reset_date": {
-          "title": "Previous ARM Reset Date",
-          "type": "string",
-          "format": "date",
-          "description": "For ARM loans, the previous date the payment that reflects the contractual ARM interest rate reset. For ARM loans where the loan is still in the interest-only period, use the date where the first payment is due. (I.E. 10/1 ARM where Next Adjustment Date is 1/1/2026, use First Paid Installment- 1/1/2016). For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a previous date."
-        },
-        "previous_arm_reset_rate": {
-          "title": "Previous ARM Reset Rate",
-          "type": "number",
-          "description": "The contractual interest rate on an ARM loan at the previous ARM reset date."
-        },
         "original_maturity_date": {
           "title": "Original Maturity Date",
           "type": "string",
