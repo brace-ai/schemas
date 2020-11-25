@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.7/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.6/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -541,7 +541,7 @@
         "third_party_authorized_to_speak": {
           "$ref": "#/definitions/tribool",
           "title": "Third Party Authorized to Speak",
-          "description": "Are the borrowers working with a 3rd party that's authorized to speak on their behalf during the modification review process?"
+          "description": "Are the borrowers working with a 3rd party that’s authorized to speak on their behalf during the modification review process?"
         },
         "third_party_name": {
           "title": "Third Party Name",
@@ -1157,7 +1157,7 @@
           "title": "Next ARM Reset Date",
           "type": "string",
           "format": "date",
-          "description": "For ARM loans, the date the payment that reflects the next contractual ARM interest rate reset is due.  For fixed-rate interest-only loans where the loan is still in the interest-only period, the date the first payment is due based on when the  loan will begin to amortize. For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a future date, unless the loan was a step-rate loan and the last step period was reached or if the Interest Only period has ended. For ARMS and Step rate loans, this value is not determined by or related to the Last Paid Installment Date. Do not provide an Interest Only end date if the loan's due date is on or after the day the loan became fully amortizing."
+          "description": "For ARM loans, the date the payment that reflects the next contractual ARM interest rate reset is due.  For fixed-rate interest-only loans where the loan is still in the interest-only period, the date the first payment is due based on when the  loan will begin to amortize. For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a future date, unless the loan was a step-rate loan and the last step period was reached or if the Interest Only period has ended. For ARMS and Step rate loans, this value is not determined by or related to the Last Paid Installment Date. Do not provide an Interest Only end date if the loan’s due date is on or after the day the loan became fully amortizing."
         },
         "next_arm_reset_rate": {
           "title": "Next ARM Reset Rate",
