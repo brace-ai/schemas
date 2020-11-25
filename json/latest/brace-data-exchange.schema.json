@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.7/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.9/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
