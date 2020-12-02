@@ -25,10 +25,6 @@
         "UNKNOWN"
       ]
     },
-    "mdy_date": {
-      "type": "string",
-      "pattern": "^(\\\\d{2})/(\\\\d{2})/(\\\\d{4})$"
-    },
     "borrower": {
       "type": "object",
       "properties": {
@@ -532,9 +528,9 @@
           "description": "The date of the last Application Status change"
         },
         "sor_application_date": {
-          "$ref": "#/definitions/mdy_date",
           "title": "SOR Application Date",
           "type": "string",
+          "format": "date",
           "description": "This field allows the servicer to control the start date against which we calculate number of days before timing out the borrower's application"
         },
         "sor_application_id": {
