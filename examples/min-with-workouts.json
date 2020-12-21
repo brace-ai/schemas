@@ -13,6 +13,8 @@
           "unique_loan_identifier": "cc6c23d9-f76a-4560-af6e-77bd090aa0d3",
           "investor_code": "GNMA",
           "loan_product": "USDA",
+          "loan_foreclosure_sale_date": "",
+          "last_paid_installment_date": "",
           "borrowers": [
             {
               "unique_borrower_identifier": "7fc98759-c203-4198-aaf0-7ae31314811c",
@@ -28,7 +30,7 @@
               "unique_workout_identifier": "250f412f-9351-4e85-8929-bac1a2acea8d",
               "workout_type": "COVID_FORBEARANCE",
               "fema_disaster_number": 4482,
-              "forbearance_period": 4,
+              "forbearance_end_date": "2020-10-01",
               "workout_history": [
                 {
                   "effective_as_of": "2020-04-10",
