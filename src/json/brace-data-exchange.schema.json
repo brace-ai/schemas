@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.10/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.11/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -243,7 +243,6 @@
         "borrower_position",
         "first_name",
         "last_name",
-        "email_address",
         "last_four_of_ssn"
       ]
     },
@@ -488,7 +487,8 @@
             "FHLMC",
             "FNMA",
             "GNMA",
-            "TREASURY"
+            "TREASURY",
+            "PRIVATE"
           ]
         },
         "investor_loan_number": {
@@ -1648,13 +1648,11 @@
       "required": [
         "unique_property_identifier",
         "number_of_units",
-        "occupancy_status",
         "property_address",
         "property_city",
         "property_state",
         "property_type",
         "property_zip_code",
-        "usage",
         "loans"
       ]
     },
