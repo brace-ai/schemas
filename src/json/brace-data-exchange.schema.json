@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.11/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.12/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -180,7 +180,7 @@
         "actively_seeking_work": {
           "$ref": "#/definitions/tribool",
           "title": "Actively Seeking Work",
-          "description": "If unemployeed, does the borrower attest that they are actively seeking work?"
+          "description": "If unemployed, does the borrower attest that they are actively seeking work?"
         },
         "self_employed": {
           "$ref": "#/definitions/tribool",
@@ -192,10 +192,10 @@
           "title": "Receiving Any Income",
           "description": "Is the borrower receiving any income?"
         },
-        "explaination_for_lack_of_income": {
-          "title": "Explaination for Lack of Income",
+        "explanation_for_lack_of_income": {
+          "title": "Explanation for Lack of Income",
           "type": "string",
-          "description": "If borrower is not receiving any income, this field can be used for a free-form explaination of why."
+          "description": "If borrower is not receiving any income, this field can be used for a free-form explanation of why."
         },
         "number_of_months_paid": {
           "title": "Number of Months Paid",
@@ -403,7 +403,7 @@
           "title": "Bankruptcy Filing Date",
           "type": "string",
           "format": "date",
-          "description": "Date bankruptcy was filed. "
+          "description": "Date bankruptcy was filed."
         },
         "bankruptcy_reaffirmed": {
           "$ref": "#/definitions/tribool",
@@ -541,7 +541,7 @@
         "third_party_authorized_to_speak": {
           "$ref": "#/definitions/tribool",
           "title": "Third Party Authorized to Speak",
-          "description": "Are the borrowers working with a 3rd party that's authorized to speak on their behalf during the modification review process?"
+          "description": "Are the borrowers working with a third party that's authorized to speak on their behalf during the modification review process?"
         },
         "third_party_name": {
           "title": "Third Party Name",
@@ -562,7 +562,7 @@
           "title": "Actual Payment Effective Date",
           "type": "string",
           "format": "date",
-          "description": "Payment Effective Date of the modified loan. This variant is the servicer-provided actual Modification Effective Date of the Final loan modification. This is servicer-provided for workout evaluation."
+          "description": "Payment Effective Date of the modified loan. This variant is the servicer-provided actual Modification Effective Date of the final loan modification. This is servicer-provided for workout evaluation."
         },
         "arm_ceiling": {
           "title": "ARM Ceiling",
@@ -609,7 +609,7 @@
         "subordinate_lien_holder_name": {
           "title": "Subordinate Lien Holder Name",
           "type": "string",
-          "description": "The name of the Company which holds the second lien"
+          "description": "The name of the company which holds the second lien"
         },
         "total_payments_received_before_modification": {
           "title": "Total Payments Received before Modification",
@@ -624,7 +624,7 @@
         "bring_current_total_due": {
           "$ref": "#/definitions/currency",
           "title": "Bring Current Total Due",
-          "description": "Total amount of PITI to reinstate the loan. aka \"total arrearage\" amount"
+          "description": "Total amount of PITI to reinstate the loan, a.k.a. \"total arrearage\" amount"
         },
         "city_code_violation_exists": {
           "$ref": "#/definitions/tribool",
@@ -632,14 +632,14 @@
           "description": "Do city code violations exist?"
         },
         "delinquency_debt_to_income_ratio": {
-          "title": "Delinquency Debt to Income Ratio ",
+          "title": "Delinquency Debt to Income Ratio",
           "type": "number",
           "description": "Up Front Housing Ratio as calculated during delinquency"
         },
         "escrow_balance": {
           "$ref": "#/definitions/currency",
           "title": "Escrow Balance",
-          "description": "Escrow Balance. Aka \"DLQ Escrow\""
+          "description": "Escrow Balance, a.k.a. \"DLQ Escrow\""
         },
         "escrow_school_taxes": {
           "$ref": "#/definitions/currency",
@@ -879,7 +879,7 @@
         "workout_type": {
           "title": "Workout Type",
           "type": "string",
-          "description": "See the \"Workout Types\" sheet. Specifiying a workout type that does not exist for the investor on the loan is an error.",
+          "description": "See the \"Workout Types\" sheet. Specifying a workout type that does not exist for the investor on the loan is an error.",
           "enum": [
             "ALTERNATIVE_MODIFICATION",
             "ALTERNATIVE_MODIFICATION_30",
@@ -969,7 +969,7 @@
         "other_description": {
           "title": "Other Description",
           "type": "string",
-          "description": "If Hardship Type is OTHER then this is a related free-form description"
+          "description": "If Hardship Type is OTHER, then this is a related free-form description"
         },
         "disaster_name": {
           "title": "Disaster Name",
@@ -979,7 +979,7 @@
         "fema_disaster_number": {
           "title": "FEMA Disaster Number",
           "type": "integer",
-          "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster 'DR-4482') (If a disaster name is supplied then this is required)"
+          "description": "Disaster number. Only the numeric portion is acceptable (e.g. 4482 for the disaster 'DR-4482'). (If a disaster name is supplied then this is required.)"
         },
         "hardship_start_date": {
           "title": "Hardship Start Date",
@@ -1037,7 +1037,7 @@
         "attorney_fees": {
           "$ref": "#/definitions/currency",
           "title": "Attorney Fees",
-          "description": "Total outstanding attorney fees. Aka \"FCL Attorney Fees\" * Capitalizable"
+          "description": "Total outstanding attorney fees, a.k.a. \"FCL Attorney Fees\" * Capitalizable"
         },
         "corporate_advance": {
           "$ref": "#/definitions/currency",
@@ -1109,7 +1109,7 @@
         "estimated_hazard_insurance_proceeds": {
           "$ref": "#/definitions/currency",
           "title": "Estimated Hazard Insurance Proceeds",
-          "description": "The estimated amount of the hazard and/or flood insurance proceeds. "
+          "description": "The estimated amount of the hazard and/or flood insurance proceeds."
         },
         "loan_pre-workout_interest_rate": {
           "title": "Loan Pre-Workout Interest Rate",
@@ -1157,18 +1157,18 @@
           "title": "Next ARM Reset Date",
           "type": "string",
           "format": "date",
-          "description": "For ARM loans, the date the payment that reflects the next contractual ARM interest rate reset is due.  For fixed-rate interest-only loans where the loan is still in the interest-only period, the date the first payment is due based on when the  loan will begin to amortize. For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a future date, unless the loan was a step-rate loan and the last step period was reached or if the Interest Only period has ended. For ARMS and Step rate loans, this value is not determined by or related to the Last Paid Installment Date. Do not provide an Interest Only end date if the loan's due date is on or after the day the loan became fully amortizing."
+          "description": "For ARM loans, the date the payment that reflects the next contractual ARM interest rate reset is due.  For fixed-rate interest-only loans where the loan is still in the interest-only period, the date the first payment is due based on when the loan will begin to amortize. For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a future date, unless the loan was a step-rate loan and the last step period was reached or if the Interest Only period has ended. For ARMs and Step Rate loans, this value is not determined by or related to the Last Paid Installment Date. Do not provide an Interest Only end date if the loan's due date is on or after the day the loan became fully amortizing."
         },
         "next_arm_reset_rate": {
           "title": "Next ARM Reset Rate",
           "type": "number",
-          "description": "The expected contractual interest rate on an ARM loan at the next ARM reset date given the reset date is within the next 120 days. Use the latest available reset rate at the time of submission. If the reset date is outside of 120 days, or for fixed-rate interest-only loans, where the loan is still in the interest-only period, report the Loan Pre-Workout Interest Rate in this field. This value is not determined by or related to the Last Paid Installment Date. For Interest Only Loans, if the Interest Only period has ended after the next contractual payment due date provided but before the current submission date, the Next Arm Reset Rate should still be provided. Report all percentages in standard format (e.g. 5.125% should be sent as 5.125)"
+          "description": "The expected contractual interest rate on an ARM loan at the next ARM reset date given the reset date is within the next 120 days. Use the latest available reset rate at the time of submission. If the reset date is outside of 120 days, or for fixed-rate interest-only loans, where the loan is still in the interest-only period, report the Loan Pre-Workout Interest Rate in this field. This value is not determined by or related to the Last Paid Installment Date. For Interest Only Loans, if the Interest Only period has ended after the next contractual payment due date provided but before the current submission date, the Next ARM Reset Rate should still be provided. Report all percentages in standard format (e.g. 5.125% should be sent as 5.125)"
         },
         "previous_arm_reset_date": {
           "title": "Previous ARM Reset Date",
           "type": "string",
           "format": "date",
-          "description": "For ARM loans, the previous date the payment that reflects the contractual ARM interest rate reset. For ARM loans where the loan is still in the interest-only period, use the date where the first payment is due. (I.E. 10/1 ARM where Next Adjustment Date is 1/1/2026, use First Paid Installment- 1/1/2016). For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a previous date."
+          "description": "For ARM loans, the previous date the payment that reflects the contractual ARM interest rate reset. For ARM loans where the loan is still in the interest-only period, use the date where the first payment is due (i.e. 10/1 ARM where Next Adjustment Date is 1/1/2026, use First Paid Installment- 1/1/2016). For step-rate loans where the loan has reached the last step period, report the date the payment became due that reflects the last step rate increase. The reported date should always be a previous date."
         },
         "previous_arm_reset_rate": {
           "title": "Previous ARM Reset Rate",
@@ -1184,7 +1184,7 @@
         "promissory_note_amount": {
           "$ref": "#/definitions/currency",
           "title": "Promissory Note Amount",
-          "description": "The total amount of the Promissory Note being given by the borrower(s). Required. Note at origination. "
+          "description": "The total amount of the Promissory Note being given by the borrower(s). Required. Note at origination."
         },
         "promissory_note_first_payment_due_date": {
           "title": "Promissory Note First Payment Due Date",
@@ -1286,12 +1286,12 @@
         "delinquent_interest_amount": {
           "$ref": "#/definitions/currency",
           "title": "Delinquent Interest Amount",
-          "description": "Delinquent interest for interest capitalization. It is the amount of delinquent interest from the loan's expected final LPI date prior to the loan workout until one month prior to the Loan Workout Effective Date. "
+          "description": "Delinquent interest for interest capitalization. It is the amount of delinquent interest from the loan's expected final LPI date prior to the loan workout until one month prior to the Loan Workout Effective Date."
         },
         "foreclosure_status": {
           "title": "Foreclosure Status",
           "type": "string",
-          "description": "Indicates where this delinquency is in the foreclosure process. In other words, during the life of the foreclosure process there are stages of completion - the foreclosure status indicates what stage the foreclosure process is currently in. If the loan is in active foreclosure, report the most recent status. ",
+          "description": "Indicates where this delinquency is in the foreclosure process. In other words, during the life of the foreclosure process there are stages of completion - the foreclosure status indicates what stage the foreclosure process is currently in. If the loan is in active foreclosure, report the most recent status.",
           "enum": [
             "BORROWER_NOTICE_SENT",
             "FORMAL_NOTICE_FILED",
@@ -1382,7 +1382,7 @@
             "INVESTOR_GUARANTOR_NOT_PARTICIPATING",
             "LOAN_PAID_OFF_OR_REINSTATED",
             "NEGATIVE_NPV",
-            "OFFER_NOT_ACCEPTED_BY_BORROWER_REQUEST_WITH_DRAWN",
+            "OFFER_NOT_ACCEPTED_BY_BORROWER_REQUEST_WITHDRAWN",
             "OTHER",
             "OTHER_INELIGIBLE_PROPERTY",
             "PAYMENT_PLAN_DEFAULT",
@@ -1463,7 +1463,7 @@
           "title": "AVM Date",
           "type": "string",
           "format": "date",
-          "description": "Date of most recent AVM"
+          "description": "Date of the most recent AVM"
         },
         "avm_value": {
           "$ref": "#/definitions/currency",
@@ -1545,7 +1545,7 @@
         "property_city": {
           "title": "Property City",
           "type": "string",
-          "description": "City in which the property securing the loan is located. "
+          "description": "City in which the property securing the loan is located."
         },
         "property_disposition": {
           "title": "Property Disposition",
@@ -1586,7 +1586,7 @@
         "usage": {
           "title": "Usage",
           "type": "string",
-          "description": "A code identifying the intended use by the borrower of the subject property. ",
+          "description": "A code identifying the intended use by the borrower of the subject property.",
           "enum": [
             "INVESTMENTPROPERTY",
             "PRINCIPALRESIDENCE",
