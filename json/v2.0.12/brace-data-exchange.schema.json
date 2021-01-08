@@ -238,6 +238,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "unique_borrower_identifier",
         "borrower_position",
@@ -287,6 +288,7 @@
           "description": "Monthly amount."
         }
       },
+      "additionalProperties": false,
       "required": [
         "income_type",
         "amount"
@@ -319,6 +321,7 @@
           "description": "Total amount"
         }
       },
+      "additionalProperties": false,
       "required": [
         "asset_type",
         "amount"
@@ -385,6 +388,7 @@
           "description": "Monthly amount."
         }
       },
+      "additionalProperties": false,
       "required": [
         "expense_type",
         "amount"
@@ -439,6 +443,7 @@
           "description": ""
         }
       },
+      "additionalProperties": false,
       "required": [
         "status_date",
         "bankruptcy_filing_date",
@@ -462,6 +467,7 @@
           "description": "Date servicemember began active duty. Can be left blank"
         }
       },
+      "additionalProperties": false,
       "required": [
         "active_duty_start_date"
       ]
@@ -754,6 +760,7 @@
           "minItems": 1
         }
       },
+      "additionalProperties": false,
       "required": [
         "unique_loan_identifier",
         "investor_code",
@@ -938,6 +945,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "unique_workout_identifier",
         "workout_type"
@@ -1026,6 +1034,7 @@
           "description": "."
         }
       },
+      "additionalProperties": false,
       "required": [
         "hardship_type",
         "hardship_start_date"
@@ -1095,6 +1104,7 @@
           "description": "Amount of monthly ground rent, investment"
         }
       },
+      "additionalProperties": false,
       "required": []
     },
     "loan_terms": {
@@ -1224,6 +1234,7 @@
           "description": "The date the mortgage note was signed."
         }
       },
+      "additionalProperties": false,
       "required": []
     },
     "loan_payment": {
@@ -1266,6 +1277,7 @@
           "description": "Principal and Interest for Investment property. Used in certain situations, e.g. Flex Mod on a investment property"
         }
       },
+      "additionalProperties": false,
       "required": [
         "contractual_payment_due_date",
         "contractual_payment_amount",
@@ -1339,6 +1351,7 @@
           "description": "Loan has two or more 30-day delinquencies in the most recent 6-month period"
         }
       },
+      "additionalProperties": false,
       "required": []
     },
     "workout_history": {
@@ -1420,6 +1433,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "effective_as_of",
         "workout_event",
@@ -1645,6 +1659,7 @@
           "minItems": 1
         }
       },
+      "additionalProperties": false,
       "required": [
         "unique_property_identifier",
         "number_of_units",
@@ -1683,7 +1698,12 @@
           ]
         }
       },
-      "required": [ "as_is_value", "valuation_date", "valuation_type" ]
+      "additionalProperties": false,
+      "required": [
+        "as_is_value",
+        "valuation_date",
+        "valuation_type"
+      ]
     },
     "property_listing": {
       "type": "object",
@@ -1715,7 +1735,11 @@
           "description": "Phone number of listing agent if property is currently listed"
         }
       },
-      "required": [ "date_property_marketed", "listing_price" ]
+      "additionalProperties": false,
+      "required": [
+        "date_property_marketed",
+        "listing_price"
+      ]
     },
     "property_purchase_offer": {
       "type": "object",
@@ -1749,7 +1773,10 @@
           "description": "Date the borrower accepted a purchase offer"
         }
       },
-      "required": [ "purchase_offer_received_date" ]
+      "additionalProperties": false,
+      "required": [
+        "purchase_offer_received_date"
+      ]
     },
     "property_insurance": {
       "type": "object",
@@ -1845,6 +1872,7 @@
           "description": "Amount of monthly escrowed windstorm insurance for investment"
         }
       },
+      "additionalProperties": false,
       "required": [
         "escrow_flood_insurance",
         "escrow_flood_insurance_2nd_home",
@@ -1863,6 +1891,7 @@
         "type": "object",
         "$ref": "#/definitions/property"
       }
-    }
+    },
+    "additionalProperties": false
   }
 }
