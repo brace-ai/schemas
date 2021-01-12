@@ -713,6 +713,45 @@
           "title": "Suspense Balance Amount",
           "description": "This represents partial mortgage payments made by the borrower that the servicer is holding in suspense. This includes any funds that are currently unapplied in the borrower's account. Do not include any amounts that are specifically flagged not to be applied to contractual payments, e.g. foreclosure fees and costs. Any value provided request file will be echoed back in the response file."
         },
+        "loan_is_subject_to_mediation": {
+          "$ref": "#/definitions/tribool",
+          "title": "Loan Is Subject To Mediation",
+          "description": "Indicates if the loan is subject to mediation"
+        },
+        "processing_month_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "Processing Month Indicator",
+          "description": "Indicates if the servicer intends to use a Processing Month for purposes of Payment Deferral evaluation (SMDU only)."
+        },
+        "escrow_prohibited_by_law_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "Processing Month Indicator",
+          "description": "Identifies escrow collection is prohibited by applicable law."
+        },
+        "estimated_mortgage_insurance_proceeds": {
+          "$ref": "#/definitions/currency",
+          "title": "Estimated Mortgage Insurance Proceeds",
+          "description": "The estimated amount of the mortgage insurance proceeds."
+        },
+        "escrowed_association_dues_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "Escrowed Association Dues Indicator",
+          "description": "Indicates that a borrower's Association or HOA dues will be escrowed by the servicer after the workout."
+        },
+        "expected_before_trial_payment_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Expected Before Trial Payment Amount",
+          "description": "The amount that the servicer expects the borrower to pay between loss mit evaluation and the start of the workout."
+        },
+        "escrow_shortfall_payback_duration": {
+          "title": "Escrow Shortfall Paymen Duration",
+          "type": "integer",
+          "description": "The duration, in months, over which the servicer will collect the Escrow Shortfall amount."
+        },
+        "litigation": {
+          "type": "object",
+          "$ref": "#/definitions/litigation"
+        },
         "task_age": {
           "title": "Task Age",
           "type": "integer",
@@ -1703,6 +1742,55 @@
         "as_is_value",
         "valuation_date",
         "valuation_type"
+      ]
+    },
+    "litigation": {
+      "type": "object",
+      "properties": {
+        "litigation_description_type": {
+          "title": "Litigation Description Type",
+          "type": "string",
+          "description": "Describes the type of litigation affecting the property or the borrower's ability to repay the debt.",
+          "enum": [
+            "NONE_ROUTINE",
+            "ROUTINE",
+            "NONE"
+          ]
+        },
+        "litigation_status_date": {
+          "title": "Litigation Status Date",
+          "type": "string",
+          "format": "date",
+          "description": "The date of the status of the reported litigation."
+        },
+        "litigation_subject_property_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "Litigation Subject Property Indicator",
+          "description": "Identifies if the litigation affects the subject property."
+        },
+        "litigation_title_conveyance_limitation_indicator": {
+          "$ref": "#/definitions/tribool",
+          "title": "Litigation Title Conveyance Limitation Indicator",
+          "description": "Identifies if the litigation affects the title or limits valid conveyance of the property."
+        },
+        "litigation_status_type": {
+          "title": "Litigation Status Type",
+          "type": "string",
+          "description": "The current status of the reported litigation.",
+          "enum": [
+            "FILED",
+            "RESOLVED",
+            "THREATENED"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "litigation_description_type",
+        "litigation_status_date",
+        "litigation_subject_property_indicator",
+        "litigation_title_conveyance_limitation_indicator",
+        "litigation_status_type"
       ]
     },
     "property_listing": {
