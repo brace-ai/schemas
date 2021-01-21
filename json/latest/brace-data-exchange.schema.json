@@ -1379,6 +1379,11 @@
           "type": "integer",
           "description": "Number of consecutive monthly contractual payments that have been made on the loan during a rolling delinquency."
         },
+        "consecutive_delinquent_months_count": {
+          "title": "Consecutive Delinquent Months Count",
+          "type": "integer",
+          "description": "The Number of months the loan has been consecutively delinquent as of the due date without a change in the level of delinquency."
+        },
         "principal_deferment": {
           "$ref": "#/definitions/currency",
           "title": "Principal deferment",
