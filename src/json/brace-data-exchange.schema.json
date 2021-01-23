@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.12/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.14/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -32,6 +32,11 @@
           "title": "Unique Borrower Identifier",
           "type": "string",
           "description": "A unique identifier, assigned by the servicer to identify the borrower. This is the primary key for this object."
+        },
+        "primary_identifier": {
+          "title": "Primary Identifier",
+          "type": "string",
+          "description": "A unique identifier for the underlying user. This optional field is used to pass the user's UI to process as part of data import."
         },
         "borrower_position": {
           "title": "Borrower Position",
@@ -1378,6 +1383,11 @@
           "title": "Number of Consecutive Payments On Rolling Delinquency",
           "type": "integer",
           "description": "Number of consecutive monthly contractual payments that have been made on the loan during a rolling delinquency."
+        },
+        "consecutive_delinquent_months_count": {
+          "title": "Consecutive Delinquent Months Count",
+          "type": "integer",
+          "description": "The Number of months the loan has been consecutively delinquent as of the due date without a change in the level of delinquency."
         },
         "principal_deferment": {
           "$ref": "#/definitions/currency",
