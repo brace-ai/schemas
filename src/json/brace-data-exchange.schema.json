@@ -33,6 +33,11 @@
           "type": "string",
           "description": "A unique identifier, assigned by the servicer to identify the borrower. This is the primary key for this object."
         },
+        "primary_identifier": {
+          "title": "Primary Identifier",
+          "type": "string",
+          "description": "A unique identifier for the underlying user. This optional field is used to pass the user's UI to process as part of data import."
+        },
         "borrower_position": {
           "title": "Borrower Position",
           "type": "integer",
