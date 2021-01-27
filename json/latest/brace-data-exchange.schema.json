@@ -1374,7 +1374,8 @@
             "SALE_PENDING",
             "REDEMPTION_PERIOD",
             "EVICTION_IN_PROCESS",
-            "UNKNOWN"
+            "UNKNOWN",
+            "NONE"
           ]
         },
         "last_paid_installment_date": {
