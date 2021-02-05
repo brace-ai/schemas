@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.15/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.16/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -291,6 +291,11 @@
           "$ref": "#/definitions/currency",
           "title": "Amount",
           "description": "Monthly amount."
+        },
+        "is_continuous": {
+          "$ref": "#/definitions/tribool",
+          "title": "Is Continuous",
+          "description": "Is the income continuous in nature? i.e. steady W-2 income"
         }
       },
       "additionalProperties": false,
