@@ -1,1 +1,5 @@
+# The schemas defined in this repository represent published contracts with Brace's clients.
+# As such I'm intentionally keeping the set of CODEOWNERS very small and requiring
+# CODEOWNER approval for merges to main to help keep things stable. -Jade
+
 *  @jadeglaze @sam-giampa-brace @kewpiedoll99
