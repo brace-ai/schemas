@@ -1,7 +1,7 @@
 # schemas
 
 To make any changes to the JSON schema for Brace data exchange:
-1. Change the file in `src/json/brace-data/exchange.schema.json`.
+1. Change the file in `src/json/brace-data-exchange.schema.json`.
    * First, increment the version number. 
    * Make your changes.
 1. Copy the changed file to the `latest` directory (replace the existing file there).
