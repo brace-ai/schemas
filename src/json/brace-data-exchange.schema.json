@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.16/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.17/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -262,7 +262,6 @@
           "enum": [
             "ADOPTIONASSISTANCE",
             "ALIMONY",
-            "BASEEMPLOYMENTNETINCOME",
             "BASEEMPLOYMENTINCOME",
             "BONUSES",
             "CHILDSUPPORT",
@@ -272,7 +271,6 @@
             "HOUSINGALLOWANCE",
             "INSURANCEINCOME",
             "INVESTMENTINCOME",
-            "NETRENTALINCOME",
             "NONBORROWERHOUSEHOLDMEMBERINCOME",
             "NONTAXABLEDISABILITYINCOME",
             "NONTAXABLESOCIALSECURITYINCOME",
@@ -280,6 +278,7 @@
             "OVERTIME",
             "PENSIONRETIREMENT",
             "PUBLICASSISTANCE",
+            "RENTALINCOME",
             "SELFEMPLOYMENTINCOME",
             "SOCIALSECURITYDISABILITY",
             "SOCIALSECURITYRETIREMENT",
@@ -287,10 +286,15 @@
             "UNEMPLOYMENT"
           ]
         },
-        "amount": {
+        "gross_amount": {
           "$ref": "#/definitions/currency",
           "title": "Amount",
-          "description": "Monthly amount."
+          "description": "Monthly gross amount."
+        },
+        "net_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Amount",
+          "description": "Monthly net amount."
         },
         "is_continuous": {
           "$ref": "#/definitions/tribool",
@@ -301,7 +305,7 @@
       "additionalProperties": false,
       "required": [
         "income_type",
-        "amount"
+        "gross_amount"
       ]
     },
     "asset": {
