@@ -286,14 +286,14 @@
             "UNEMPLOYMENT"
           ]
         },
-        "gross_amount": {
+        "amount": {
           "$ref": "#/definitions/currency",
           "title": "Amount",
           "description": "Monthly gross amount."
         },
         "net_amount": {
           "$ref": "#/definitions/currency",
-          "title": "Amount",
+          "title": "Net Amount",
           "description": "Monthly net amount."
         },
         "is_continuous": {
@@ -305,7 +305,7 @@
       "additionalProperties": false,
       "required": [
         "income_type",
-        "gross_amount"
+        "amount"
       ]
     },
     "asset": {
