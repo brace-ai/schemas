@@ -762,21 +762,6 @@
           "type": "integer",
           "description": "The duration, in months, over which the servicer will collect the Escrow Shortfall amount."
         },
-        "can_pay_full_amount_in_single_payment": {
-          "$ref": "#/definitions/tribool",
-          "title": "Can Pay Full Amount in Single Payment",
-          "description": "Indicates if the borrower is able to bring the loan current in a single payment"
-        },
-        "can_pay_increased_amount": {
-          "$ref": "#/definitions/tribool",
-          "title": "Can Pay Increased Amount",
-          "description": "Indicates if the borrower can pay an increased monthly payment amount to reinstate the loan"
-        },
-        "can_resume_full_payments": {
-          "$ref": "#/definitions/tribool",
-          "title": "Can Resume Full Payments",
-          "description": "Indicates if the borrower can resume paying the current payment amount"
-        },
         "litigation": {
           "type": "object",
           "$ref": "#/definitions/litigation"
@@ -1120,6 +1105,21 @@
           "$ref": "#/definitions/currency",
           "title": "Verified gross continuous income prior to PDMDA",
           "description": "."
+        },
+        "can_pay_full_amount_in_single_payment": {
+          "$ref": "#/definitions/tribool",
+          "title": "Can Pay Full Amount in Single Payment",
+          "description": "Indicates if the borrower is able to bring the loan current in a single payment"
+        },
+        "can_pay_increased_amount": {
+          "$ref": "#/definitions/tribool",
+          "title": "Can Pay Increased Amount",
+          "description": "Indicates if the borrower can pay an increased monthly payment amount to reinstate the loan"
+        },
+        "can_resume_full_payments": {
+          "$ref": "#/definitions/tribool",
+          "title": "Can Resume Full Payments",
+          "description": "Indicates if the borrower can resume paying the current payment amount"
         }
       },
       "additionalProperties": false,
