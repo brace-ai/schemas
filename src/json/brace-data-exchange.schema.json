@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.18/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.19/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -1175,6 +1175,11 @@
           "$ref": "#/definitions/currency",
           "title": "Ground Rent Monthly Amount Investment",
           "description": "Amount of monthly ground rent, investment"
+        },
+        "loan_current_escrow_advance_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Loan Current Escrow Advance Amount",
+          "description": "Escrow advances paid by the servicer prior to the workout effective date, used only for COVID-19 and PDD options."
         }
       },
       "additionalProperties": false,
@@ -1373,6 +1378,11 @@
           "title": "Delinquent Interest Amount",
           "description": "Delinquent interest for interest capitalization. It is the amount of delinquent interest from the loan's expected final LPI date prior to the loan workout until one month prior to the Loan Workout Effective Date."
         },
+        "delinquent_interest_through_submission_date_amount": {
+          "$ref": "#/definitions/currency",
+          "title": "Delinquent Interest Through Submission Date Amount",
+          "description": "The Amount of delinquent interest from the LPI date through the end of the proceeding month. This is delinquent interest as of the date of evaluation."
+        },
         "foreclosure_status": {
           "title": "Foreclosure Status",
           "type": "string",
@@ -1418,6 +1428,11 @@
           "title": "Consecutive Delinquent Months Count",
           "type": "integer",
           "description": "The Number of months the loan has been consecutively delinquent as of the due date without a change in the level of delinquency."
+        },
+        "number_of_times_30_days_delinquent_in_6_months": {
+          "title": "Number Of Times 30 Days Delinquent In 6 Months",
+          "type": "integer",
+          "description": "This is the number of times a borrower has been 30 days delinquent in the previous six months preceding the month of evaluation."
         },
         "principal_deferment": {
           "$ref": "#/definitions/currency",
