@@ -1085,16 +1085,6 @@
             "RESOLVED"
           ]
         },
-        "pcs_orders_are_verified_50_miles_beyond": {
-          "$ref": "#/definitions/tribool",
-          "title": "PCS orders are verified 50 miles beyond",
-          "description": "Distance of the verified PCS address is more than 50 miles from the mortgaged residence of the servicemember. Can be left blank"
-        },
-        "pcs_orders": {
-          "$ref": "#/definitions/tribool",
-          "title": "PCS orders",
-          "description": "PCS orders. Can be left blank"
-        },
         "pdmda_declaration_date": {
           "title": "PDMDA declaration date",
           "type": "string",
