@@ -1096,6 +1096,18 @@
             "RESOLVED"
           ]
         },
+        "pcs_orders_are_verified_50_miles_beyond": {
+          "$ref": "#/definitions/tribool",
+          "title": "PCS orders are verified 50 miles beyond",
+          "description": "Distance of the verified PCS address is more than 50 miles from the mortgaged residence of the servicemember. This has been deprecated and should be left blank.",
+          "deprecated": true
+        },
+        "pcs_orders": {
+          "$ref": "#/definitions/tribool",
+          "title": "PCS orders",
+          "description": "PCS orders. This has been deprecated and should be left blank.",
+          "deprecated": true
+        },
         "pdmda_declaration_date": {
           "title": "PDMDA declaration date",
           "type": "string",
