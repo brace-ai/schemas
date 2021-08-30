@@ -768,6 +768,11 @@
           "format": "date",
           "description": "The most recent mortgage closing unrelated to the mortgage being evaluated. This is discovered by looking through a credit report."
         },
+        "brp_is_complete": {
+          "$ref": "#/definitions/tribool",
+          "title": "BRP Is Complete",
+          "description": "The Borrower Response Package for the loan has been deemed complete by the servicer. If not using the brace servicer platform, this will always be false."
+        },
         "litigation": {
           "type": "object",
           "$ref": "#/definitions/litigation"
