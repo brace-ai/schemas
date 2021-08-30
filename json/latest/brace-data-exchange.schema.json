@@ -771,7 +771,7 @@
         "brp_is_complete": {
           "$ref": "#/definitions/tribool",
           "title": "BRP Is Complete",
-          "description": "The Borrower Response Package for the loan has been deemed complete by the servicer."
+          "description": "The Borrower Response Package for the loan has been deemed complete by the servicer. If not using the brace servicer platform, this will always be false."
         },
         "litigation": {
           "type": "object",
