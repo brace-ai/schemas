@@ -758,9 +758,15 @@
           "description": "The amount that the servicer expects the borrower to pay between loss mit evaluation and the start of the workout."
         },
         "escrow_shortfall_payback_duration": {
-          "title": "Escrow Shortfall Paymen Duration",
+          "title": "Escrow Shortfall Payment Duration",
           "type": "integer",
           "description": "The duration, in months, over which the servicer will collect the Escrow Shortfall amount."
+        },
+        "most_recent_unrelated_mortgage_closing": {
+          "title": "Most Recent Unrelated Mortgage Closing",
+          "type": "string",
+          "format": "date",
+          "description": "The most recent mortgage closing unrelated to the mortgage being evaluated. This is discovered by looking through a credit report."
         },
         "litigation": {
           "type": "object",
