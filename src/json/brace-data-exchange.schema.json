@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://brace-ai.github.io/schemas/json/v2.0.19/brace-data-exchange.schema.json",
+  "$id": "https://brace-ai.github.io/schemas/json/v2.0.24/brace-data-exchange.schema.json",
   "title": "Brace Data Exchange JSON Specification",
   "description": "This schema describes the format for exchanging data with Brace Software for integrations with their loss mitigation system via API callback or file exchange.",
   "definitions": {
@@ -772,6 +772,37 @@
           "$ref": "#/definitions/tribool",
           "title": "BRP Is Complete",
           "description": "The Borrower Response Package for the loan has been deemed complete by the servicer. If not using the brace servicer platform, this will always be false."
+        },
+        "caivrs_eligible":
+        {
+          "$ref": "#/definitions/tribool",
+          "title": "CAIVRS Eligibility",
+          "description": "One or more borrowers appear on the Credit Alert Verification Reporting System."
+        },
+        "has_been_borrower_on_loan_with_prior_fha_claim_within_3yrs": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has Borrower Been Borrower On Loan With Prior FHA Claim Within 3 Years",
+          "description": "One or more borrowers or co-signers on the subject property, except through inheritance, have had a prior loan on which a FHA partial claim has been paid within the previous three years."
+        },
+        "is_ineligible_due_to_delinquent_federal_nontax_debt": {
+          "$ref": "#/definitions/tribool",
+          "title": "Is Ineligible Due To Delinquent Federal Nontax Debt",
+          "description": "One or more borrowers who have delinquent federal non-tax debt, including other FHA-insured mortgages, are ineligible for certain loss mitigation options."
+        },
+        "has_consented_to_assumed_personal_liability": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has Consented To Assumed Personal Liability",
+          "description": "Non-borrowers consent to assume personal liability of the mortgage debt."
+        },
+        "has_non_borrower_consented_to_become_borrower": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has Non Borrower Consented To Become Borrower",
+          "description": "All non-borrowers consent to be added to the mortgage as borrowers with all rights and responsibilities under the mortgage."
+        },
+        "has_borrower_consented_to_add_nonborrower_for_loss_mitigation": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has Borrower Consented To Add Nonborrower For Loss Mitigation",
+          "description": "All current borrowers consent to allow non-borrowers to be considered for the loss mitigation option."
         },
         "litigation": {
           "type": "object",
@@ -1636,6 +1667,31 @@
           "title": "Environmental Problems",
           "description": "The property has problems that are environmental in nature (e.g. black mold.)"
         },
+        "has_new_principal_residence_over_100mi_away": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has New Principal Residence Over 100 Miles Away",
+          "description": "The borrower or co-borrower has established a new principal residence more than 100 miles from the borrower’s current, or former, principal residence."
+        },
+        "has_new_dependents_property_doesnt_meet_needs": {
+          "$ref": "#/definitions/tribool",
+          "title": "Has New Dependents Property Doesn't Meet Needs",
+          "description": "Borrower to provide satisfactory evidence that there has been an increase in legal dependents and the principal residence fails to meet family needs."
+        },
+        "is_borrower_vacating_residence": {
+          "$ref": "#/definitions/tribool",
+          "title": "Is Borrower Vacating Residence",
+          "description": "The borrower or co-borrower is vacating the principal residence with no intent to return. The principal residence will remain occupied by at least one existing borrower."
+        },
+        "not_rental_18mo_before_eval": {
+          "$ref": "#/definitions/tribool",
+          "title": "Not Rental 18 Months Before Evaluation",
+          "description": "The subject property was used as a rental/investment property in any one of the previous 18 months prior to the evaluation date."
+        },
+        "number_of_non_occupant_coborrowers": {
+          "title": "Number Of Non Occupant Coborrowers",
+          "type": "integer",
+          "description": "Count of the number of non-occupying co-borrowers on the subject property."
+        },
         "number_of_units": {
           "title": "Number of Units",
           "type": "integer",
@@ -1644,7 +1700,20 @@
         "occupancy_status": {
           "title": "Occupancy Status",
           "type": "string",
-          "description": "A code identifying the current occupancy status of the subject property. ",
+          "description": "A code identifying the current occupancy status of the subject property.",
+          "enum": [
+            "ABANDONED",
+            "BORROWER_OCCUPIED",
+            "OCCUPIED_BY_UNKNOWN",
+            "TENANT_OCCUPIED",
+            "UNKNOWN",
+            "VACANT"
+          ]
+        },
+        "occupancy_status_at_pdmda": {
+          "title": "Occupancy Status at PDMDA",
+          "type": "string",
+          "description": "The borrower’s occupancy status of the subject property at the time of the PDMDA.",
           "enum": [
             "ABANDONED",
             "BORROWER_OCCUPIED",
