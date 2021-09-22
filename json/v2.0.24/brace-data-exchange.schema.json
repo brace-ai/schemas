@@ -781,7 +781,7 @@
         },
         "has_been_borrower_on_loan_with_prior_fha_claim_within_3yrs": {
           "$ref": "#/definitions/tribool",
-          "title": "Gas Borrower Been Borrower On Loan With Prior FHA Claim Within 3 Years",
+          "title": "Has Borrower Been Borrower On Loan With Prior FHA Claim Within 3 Years",
           "description": "One or more borrowers, exception through inheritance, or co-signers on the subject property have had a prior loan on which a FHA partial claim has been paid within the previous three years from evaluation."
         },
         "is_ineligible_due_to_delinquent_federal_nontax_debt": {
