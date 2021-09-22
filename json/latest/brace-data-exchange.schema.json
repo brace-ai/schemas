@@ -782,7 +782,7 @@
         "has_been_borrower_on_loan_with_prior_fha_claim_within_3yrs": {
           "$ref": "#/definitions/tribool",
           "title": "Has Borrower Been Borrower On Loan With Prior FHA Claim Within 3 Years",
-          "description": "One or more borrowers, exception through inheritance, or co-signers on the subject property have had a prior loan on which a FHA partial claim has been paid within the previous three years from evaluation."
+          "description": "One or more borrowers or co-signers on the subject property, except through inheritance, have had a prior loan on which a FHA partial claim has been paid within the previous three years."
         },
         "is_ineligible_due_to_delinquent_federal_nontax_debt": {
           "$ref": "#/definitions/tribool",
@@ -1670,17 +1670,17 @@
         "has_new_principal_residence_over_100mi_away": {
           "$ref": "#/definitions/tribool",
           "title": "Has New Principal Residence Over 100 Miles Away",
-          "description": "The borrower or co-borrower has established a new principal residence more than 100 miles from the borrower’s current, or former, principal residence. "
+          "description": "The borrower or co-borrower has established a new principal residence more than 100 miles from the borrower’s current, or former, principal residence."
         },
         "has_new_dependents_property_doesnt_meet_needs": {
           "$ref": "#/definitions/tribool",
-          "title": "Has New Dependents property Doesn't Meet Needs",
-          "description": "Borrower to provide satisfactory evidence that there has been an increase in legal dependents and the principal residence fails to meet family needs. "
+          "title": "Has New Dependents Property Doesn't Meet Needs",
+          "description": "Borrower to provide satisfactory evidence that there has been an increase in legal dependents and the principal residence fails to meet family needs."
         },
         "is_borrower_vacating_residence": {
           "$ref": "#/definitions/tribool",
           "title": "Is Borrower Vacating Residence",
-          "description": "The borrower or co-borrower is vacating the principal residence with no intent to return. The principal residence will remain occupied by at least one existing borrower.  "
+          "description": "The borrower or co-borrower is vacating the principal residence with no intent to return. The principal residence will remain occupied by at least one existing borrower."
         },
         "not_rental_18mo_before_eval": {
           "$ref": "#/definitions/tribool",
@@ -1690,7 +1690,7 @@
         "number_of_non_occupant_coborrowers": {
           "title": "Number Of Non Occupant Coborrowers",
           "type": "integer",
-          "description": "Count of the number of non-occupying co-borrowers on the subject property. "
+          "description": "Count of the number of non-occupying co-borrowers on the subject property."
         },
         "number_of_units": {
           "title": "Number of Units",
@@ -1700,7 +1700,7 @@
         "occupancy_status": {
           "title": "Occupancy Status",
           "type": "string",
-          "description": "A code identifying the current occupancy status of the subject property. ",
+          "description": "A code identifying the current occupancy status of the subject property.",
           "enum": [
             "ABANDONED",
             "BORROWER_OCCUPIED",
@@ -1713,7 +1713,7 @@
         "occupancy_status_at_pdmda": {
           "title": "Occupancy Status at PDMDA",
           "type": "string",
-          "description": "The borrower’s occupancy status of the subject property at the time of the PDMDA. ",
+          "description": "The borrower’s occupancy status of the subject property at the time of the PDMDA.",
           "enum": [
             "ABANDONED",
             "BORROWER_OCCUPIED",
