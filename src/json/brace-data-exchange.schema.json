@@ -804,6 +804,12 @@
           "title": "Has Borrower Consented To Add Nonborrower For Loss Mitigation",
           "description": "All current borrowers consent to allow non-borrowers to be considered for the loss mitigation option."
         },
+        "qrpc_achieved_time": {
+          "title": "QRPC Achieved Time",
+          "type": "string",
+          "format": "date",
+          "description": "The date on which Quality Right Party Contact was achieved by the servicer."
+        },
         "litigation": {
           "type": "object",
           "$ref": "#/definitions/litigation"
