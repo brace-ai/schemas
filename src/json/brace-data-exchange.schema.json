@@ -1195,6 +1195,16 @@
           "title": "Escrow Shortfall Investment",
           "description": "Monthly escrow shortfall from last escrow analysis for investment"
         },
+        "escrow_status": {
+          "title": "Escrow Status",
+          "type": "string",
+          "description": "Denotes whether the loan is fully escrowed where the servicer pays all insurances and taxes on behalf of the borrower, partially escrowed where the servicer pays some, but not all, of the insurance and taxes on a loan, or, if the loan is not escrowed and the borrower pays all insurances and taxes.",
+          "enum": [
+            "FULL",
+            "PARTIAL",
+            "NONE"
+          ]
+        },
         "escrow_tax_amount": {
           "$ref": "#/definitions/currency",
           "title": "Escrow Tax Amount",
@@ -1311,6 +1321,16 @@
           "title": "Previous ARM Reset Rate",
           "type": "number",
           "description": "The contractual interest rate on an ARM loan at the previous ARM reset date."
+        },
+        "remaining_adjustments_on_step_rate_loan": {
+          "title": "Remaining Adjustments on Step Rate Loan",
+          "type": "integer",
+          "description": "How many adjustments remain on a step-rate loan before the loan transitions into a full amortized fixed rate loan."
+        },
+        "remaining_adjustments_on_arm_loan": {
+          "title": "Remaining Adjustments on ARM Loan",
+          "type": "integer",
+          "description": "How many adjustments remain on an adjustable rate loan before the loan transitions into a full amortized fixed rate loan."
         },
         "original_maturity_date": {
           "title": "Original Maturity Date",
@@ -1443,6 +1463,16 @@
             "REDEMPTION_PERIOD",
             "EVICTION_IN_PROCESS",
             "UNKNOWN",
+            "NONE"
+          ]
+        },
+        "foreclosure_sale_type": {
+          "title": "Foreclosure Sale Type",
+          "type": "string",
+          "description": "Denotes whether the foreclosure sale is a Judicial sale or a Non-Judicial sale",
+          "enum": [
+            "JUDICIAL",
+            "NON_JUDICIAL",
             "NONE"
           ]
         },
